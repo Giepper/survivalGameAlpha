@@ -416,14 +416,14 @@ function clothes(itemName,type,price,armor,photo){
         }
     }
 }
-var cap=clothes('cap','head',0,1,'capArmor-svgrepo-com.svg');
-var shirt=clothes('shirt','body',0,1,'shirtArmor-svgrepo-com.svg');
-var jeans=clothes('jeans','legs',0,1,'jeans-svgrepo-com.svg');
+var cap=clothes('cap','head',0,2,'capArmor-svgrepo-com.svg');
+var shirt=clothes('shirt','body',0,3,'shirtArmor-svgrepo-com.svg');
+var jeans=clothes('jeans','legs',0,2,'jeans-svgrepo-com.svg');
 var shoes=clothes('shoes','foot',0,1,'shoesArmor-svgrepo-com.svg');
-var helmet=clothes('helmet','head',300,3,'helmet-svgrepo-com.svg');
-var ballisticCam=clothes('vest','body',350,4,'kevlar-vest-svgrepo-com.svg');
-var militaryTrousers=clothes('military trousers','legs',200,2,'trousers-pants-svgrepo-com.svg');
-var militaryShoes=clothes('military shoes','foot',200,2,'boots-svgrepo-com.svg');
+var helmet=clothes('helmet','head',300,5,'helmet-svgrepo-com.svg');
+var ballisticCam=clothes('vest','body',350,6,'kevlar-vest-svgrepo-com.svg');
+var militaryTrousers=clothes('military trousers','legs',200,4,'trousers-pants-svgrepo-com.svg');
+var militaryShoes=clothes('military shoes','foot',200,3,'boots-svgrepo-com.svg');
 // cap.foundItem();
 // shirt.foundItem();
 // jeans.foundItem();
@@ -530,16 +530,14 @@ function fastAttackFunction(){
     attack=(Math.random()*10*itemDamage.getAttribute('value')).toFixed(0);
     health-=attack;
 
-    damage=(Math.random()*7).toFixed(0);
+    damage=(Math.random()*6).toFixed(0);
     damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
-    realDamage=damage-damageReduct;
-    myHealth-=realDamage;
-
     damageItemsInfo();
 }
 function powerAttackFunction(){
     var fastAttakSound;
     var rand=Math.random()*10;
+    var randAtk=Math.random()*10;
     if(rand<3){
         fastAttakSound=new Audio('powerSound.mp3');
     }
@@ -552,17 +550,28 @@ function powerAttackFunction(){
     fastAttakSound.volume=0.5;
     fastAttakSound.play();
 
-    attack=(Math.random()*10*itemDamage.getAttribute('value')).toFixed(0);
-    health-=attack;
+    if(randAtk<6){
+        attack=(Math.random()*15*itemDamage.getAttribute('value')).toFixed(0);
+        health-=attack;
+    }
 
     damageItemsInfo();
 }
 
 function damageItemsInfo(){
-    damage=(Math.random()*5).toFixed(0);
+    damage=(Math.random()*7).toFixed(0);
     damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
-    realDamage=damage-damageReduct;
+    if(damageReduct>damage){
+        realDamage=damage;
+    }else{
+        realDamage=damage-damageReduct;
+    }
     myHealth-=realDamage;
+
+    console.log("damage "+damage);
+    console.log("damage reduct "+damageReduct);
+    console.log("real damage "+realDamage);
+    console.log("health "+myHealth);
 
     healthIndicator.setAttribute('value',myHealth);
     myHealthWidth=myHealth+'%';
