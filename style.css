@@ -310,3 +310,26 @@ p.itemStats{
     z-index: 70;
     display: none;
 }
+p.money{
+    color: gold;
+}
+.enemyContainer{
+    width: 25%;
+    display: none;
+    padding: 2%;
+}
+.enemyHealthBar{
+    height: 10px;
+    background-color: green;
+}
+@media screen and (max-width: 1000px){
+    .centerEdit{
+        flex-basis: 80%;
+    }
+    .right{
+        flex-basis: 100%;
+    }
+    .foundItemInfo{
+        height: auto;
+    }
+}

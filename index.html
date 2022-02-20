@@ -15,8 +15,8 @@
             <div class="bars">
                 <div class="healthIndicator" value="100"></div>
                 <div class="defenseIndicator" value="4"></div>
-                <div class="Money" value="0"></div>
                 <div class="stats">
+                    <p class="money itemStats" value="0">Money: <span class="moneyValue">0</span></p>
                     <p class="itemStats">Damage: <span class="itemDamage" value="1"><span class="dmg">1</span></span></p>
                     <p class="itemStats">Critical Chance: <span class="itemCriticalChance" value="1"><span class="criticalDmg">1</span></span></p>
                     <p class="itemStats">Head armor: <span class="headArmorSlot" value="0"><span class="armorHeadValue">0</span></span></p>
@@ -74,6 +74,9 @@
         </div>
         <div class="centerEdit">
             <div class="main">
+                <div class="enemyContainer">
+                    <div class="enemyHealthBar"></div>
+                </div>
                 <div class="foundModal"></div>
                 <div class="eqModal">
                     <div class="eqTitle">Equipment</div>
@@ -91,7 +94,12 @@
                     <button class="runButton">Run</button>
                 </div> -->
                 <div class="sniperModal dangerModal">Enemy sniper shot you. You receive 50hp damage</div>
-                <div class="city">
+                <div class="oneManModal dangerModal">You meet an armed man. He doesn't look very friendly</div>
+                <div class="groupOfMenModal dangerModal">You meet a group of armed men. They want your equipment</div>
+                <div class="enemyPatrolModal dangerModal">You meet an enemy army patrol. have orders to kill everyone, including you</div>
+                <div class="winModal dangerModal">You killed the enemy</div>
+                <div class="deadModal dangerModal">You were killed</div>
+                <div class="city placeItem">
                     <button class="flats cityPoint pointBtn">Flats</button>
                     <div class="searchModal" id="flatsModal">
                         <button class="btn searchBtn" id="flatsBtn">Search</button>
@@ -99,8 +107,8 @@
                         <p class="chance">
                             <span class="foodChance foodChance30" value="30">Food chance: 30%</span><br>
                             <span class="valChance valChance10" value="10">Valuable items chance: 10%</span><br>
-                            <span class="clothesChance clothesChance5" value="5">Clothes chance: 5%</span><br>
-                            <span class="weaponChance weaponChance1" value="1">Weapon chance: 1%</span><br>
+                            <span class="clothesChance clothesChance10" value="10">Clothes chance: 10%</span><br>
+                            <span class="weaponChance weaponChance10" value="10">Weapon chance: 10%</span><br>
                             <span class="dangerChance dangerChance15" value="15">Danger chance: 15%</span>
                         </p>
                     </div>
@@ -111,8 +119,8 @@
                         <p class="chance">
                             <span class="foodChance foodChance15" value="15">Food chance: 15%</span><br>
                             <span class="valChance valChance50" value="50">Valuable items chance: 50%</span><br>
-                            <span class="clothesChance clothesChance15" value="15">Clothes chance: 15%</span><br>
-                            <span class="weaponChance weaponChance20" value="20">Weapon chance: 20%</span><br>
+                            <span class="clothesChance clothesChance20" value="20">Clothes chance: 20%</span><br>
+                            <span class="weaponChance weaponChance25" value="25">Weapon chance: 25%</span><br>
                             <span class="dangerChance dangerChance75" value="75">Danger chance: 75%</span>
                         </p>
                     </div>
@@ -123,8 +131,8 @@
                         <p class="chance">
                             <span class="foodChance foodChance75" value="75">Food chance: 75%</span><br>
                             <span class="valChance valChance5" value="5">Valuable items chance: 5%</span><br>
-                            <span class="clothesChance clothesChance1" value="1">Clothes chance: 1%</span><br>
-                            <span class="weaponChance weaponChance1" value="1">Weapon chance: 1%</span><br>
+                            <span class="clothesChance clothesChance30" value="30">Clothes chance: 30%</span><br>
+                            <span class="weaponChance weaponChance20" value="20">Weapon chance: 20%</span><br>
                             <span class="dangerChance dangerChance30" value="30">Danger chance: 30%</span>
                         </p>
                     </div>
@@ -141,13 +149,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="suburbs">
+                <div class="suburbs placeItem">
                     <button class="oneFamilyHouse suburbsPoint pointBtn">House</button>
                     <div class="searchModal" id="houseModal">
                         <button class="btn searchBtn" id="houseBtn">Search</button>
                         <div class="searchProgress"></div>
                         <p class="chance">
-                            <span class="foodChance foodChance15" value="15">Food chance: 15%</span><br>
+                            <span class="foodChance foodChance30" value="30">Food chance: 30%</span><br>
                             <span class="valChance valChance5" value="5">Valuable items chance: 5%</span><br>
                             <span class="clothesChance clothesChance1" value="1">Clothes chance: 1%</span><br>
                             <span class="weaponChance weaponChance1" value="1">Weapon chance: 1%</span><br>
@@ -191,7 +199,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="forest">
+                <div class="forest placeItem">
                     <button class="hunt forestPoint pointBtn">Hunt</button>
                     <div class="searchModal" id="huntModal">
                         <button class="btn searchBtn" id="huntBtn">Search</button>
@@ -217,7 +225,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="secretPlace"></div>
+                <div class="secretPlace placeItem"></div>
                 <div class="home">
                     <button class="trader homePoint pointBtn">Trader</button>
                     <button class="hospital homePoint pointBtn">Hospital</button>
@@ -228,7 +236,7 @@
                 <div class="attackButtons">
                     <button class="fastAttack atk" disabled>Fast attack</button>
                     <button class="powerAttack atk" disabled>Power attack</button>
-                    <button class="defend atk" disabled>Defend</button>
+                    <!-- <button class="defend atk" disabled>Defend</button> -->
                     <button class="run atk" disabled>Run</button>
                 </div>
             </div>

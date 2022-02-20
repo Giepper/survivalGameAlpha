@@ -16,15 +16,145 @@ var cloneLegsArmorReverse=document.querySelector('.legsArmorAdd');
 var cloneFootArmor;
 var cloneFootArmorReverse=document.querySelector('.footArmorAdd');
 
+var placeItem=document.querySelectorAll('.placeItem');
+
+var myHealth=100;
+
+//Add to Eq
+
+//Human Items
+//Human
+var head=document.querySelector('.head');
+var leftArm=document.querySelector('.leftArm');
+var rightArm=document.querySelector('.rightArm');
+var body=document.querySelector('.body');
+var legs=document.querySelector('.legs');
+//Deafult Item Squares
+var defaultWeaponImg=document.querySelector('.defaultWeaponImg');
+var defaultHeadArmorImg=document.querySelector('.defaultHeadArmorImg');
+var defaultBodyArmorImg=document.querySelector('.defaultBodyArmorImg');
+var defaultLegsArmorImg=document.querySelector('.defaultLegsArmorImg');
+var defaultFootArmorImg=document.querySelector('.defaultFootArmorImg');
+//Armor
+var armor=document.querySelectorAll('.armor');
+var headArmor=document.querySelector('.headArmor');
+var bodyArmor=document.querySelector('.bodyArmor');
+var legsArmor=document.querySelector('.legsArmor');
+var footArmor=document.querySelector('.footArmor');
+//Add Armor
+var headArmorAdd=document.querySelector('.headArmorAdd');
+var bodyArmorAdd=document.querySelector('.bodyArmorAdd');
+var legsArmorAdd=document.querySelector('.legsArmorAdd');
+var footArmorAdd=document.querySelector('.footArmorAdd');
+//Weapon
+var weaponSquare=document.querySelector('.weapon');
+var weaponItem=document.querySelectorAll('.weaponItem');
+var usingWeapon=document.querySelector('.usingWeapon');
+var weaponAdd=document.querySelector('.weaponAdd');
+//Item Stats
+var itemDamage=document.querySelector('.itemDamage');
+var dmg=document.querySelector('.dmg');
+var cricitaclDmg=document.querySelector('.criticalDmg');
+var itemCriticalChance=document.querySelector('.itemCriticalChance');
+var itemArmor=document.querySelector('.itemArmor');
+//Weapon Indicators
+var weaponDamage;
+var weaponCriticalChance;
+var itemDamageTxt;
+var itemCriticalChanceTxt;
+//Armor Armor
+var itemArmorTxt;
+var headArmorArmor=0;
+var bodyArmorArmor=0;
+var legsArmorArmor=0;
+var footArmorArmor=0;
+//Armor Indicators
+var headArmorTxt;
+var bodyArmorTxt;
+var legsArmorTxt;
+var footArmorTxt;
+var armorValue=document.querySelector('.armorValue');
+//Armor Slots
+var headArmorSlot=document.querySelector('.headArmorSlot');
+var bodyArmorSlot=document.querySelector('.bodyArmorSlot');
+var legsArmorSlot=document.querySelector('.legsArmorSlot');
+var footArmorSlot=document.querySelector('.footArmorSlot');
+//Armor 0 Value
+var headArmorValue=document.querySelector('.armorHeadValue');
+var bodyArmorValue=document.querySelector('.armorBodyValue');
+var legsArmorValue=document.querySelector('.armorLegsValue');
+var footArmorValue=document.querySelector('.armorFootValue');
+
+//Map Items
+var mapButton=document.querySelector('.mapButton');
+var mapModal=document.querySelector('.mapModal');
+var mapPoint=document.querySelectorAll('.mapPoint');
+var mapClose=document.querySelector('.mapClose');
+
+//Equipment Items
+var eqButton=document.querySelector('.eqButton');
+var eqModal=document.querySelector('.eqModal');
+var eqContainer=document.querySelector('.eqContainer');
+var eqClose=document.querySelector('.eqClose');
+
+//Search Items
+var pointBtn=document.querySelectorAll('.pointBtn');
+var searchModal=document.querySelectorAll('.searchModal');
+var searchBtn=document.querySelectorAll('.searchBtn');
+var searchProgress=document.querySelectorAll('.searchProgress');
+var foodChance=document.querySelectorAll('.foodChance');
+var valChance=document.querySelectorAll('.valChance');
+var weaponChance=document.querySelectorAll('.weaponChance');
+var clothesChance=document.querySelectorAll('.clothesChance');
+var dangerChance=document.querySelectorAll('.dangerChance');
+var dangerModal=document.querySelector('.dangerModal');
+var sniperModal=document.querySelector('.sniperModal');
+var oneManModal=document.querySelector('.oneManModal');
+var groupOfMenModal=document.querySelector('.groupOfMenModal');
+var enemyPatrolModal=document.querySelector('.enemyPatrolModal');
+
+//Attack buttons
+var wpnDmg=itemDamage.getAttribute('value')
+var fastAttack=document.querySelector('.fastAttack');
+var powerAttack=document.querySelector('.powerAttack');
+var defend=document.querySelector('.defend');
+var run=document.querySelector('.run');
+var enemyOneManHp=100;
+var attack=Math.random()*10*wpnDmg;
+
+//Danger Functions
+var atk=document.querySelectorAll('.atk');
+function attackEnable(){
+    for(let x=0;x<atk.length;x++){
+        atk[x].removeAttribute('disabled');
+    }
+}
+function attackDisable(){
+    for(let x=0;x<atk.length;x++){
+        atk[x].setAttribute('disabled','');
+    }
+}
+
+
 function disableButtons(){
     mapButton.setAttribute('disabled','');
     eqButton.setAttribute('disabled','');
-    searchBtn.setAttribute('disabled','');
 }
 function enableButtons(){
     mapButton.removeAttribute('disabled');
     eqButton.removeAttribute('disabled');
-    searchBtn.removeAttribute('disabled');
+}
+function sniperDanger(){
+    sniperModal.style.setProperty('display','none');
+}
+function oneManDanger(){
+    oneManModal.style.setProperty('display','none');
+}
+function groupOfMenDanger(){
+    groupOfMenModal.style.setProperty('display','none');
+}
+function enemyPatrolDanger(){
+    enemyPatrolModal.style.setProperty('display','none');
 }
 
 //Hide Items
@@ -221,8 +351,8 @@ function weapon(itemName,price,damage,criticalChance,photo){
 }
 var pipe=weapon('pipe',0,5,5,'bat-svgrepo-com.svg');
 var knife=weapon('knife',150,10,15,'knife-svgrepo-com.svg');
-var axe=weapon('axe',300,17,17,'axe-svgrepo-com.svg');
-var gun=weapon('gun',700,30,30,'gunWeapon-svgrepo-com.svg');
+var axe=weapon('axe',300,12,17,'axe-svgrepo-com.svg');
+var gun=weapon('gun',700,15,30,'gunWeapon-svgrepo-com.svg');
 // pipe.foundItem();
 // knife.foundItem();
 // axe.foundItem();
@@ -303,6 +433,22 @@ var militaryShoes=clothes('military shoes','foot',200,2,'boots-svgrepo-com.svg')
 // militaryTrousers.foundItem();
 // militaryShoes.foundItem();
 
+var healthIndicator=document.querySelector('.healthIndicator');
+var myHealthWidth;
+var enemyContainer=document.querySelector('.enemyContainer');
+var enemyHealthBar=document.querySelector('.enemyHealthBar');
+var winModal=document.querySelector('.winModal');
+var deadModal=document.querySelector('.deadModal');
+var health;
+var healthWidth;
+var damage;
+var damageReduct;
+var realDamage;
+
+function winModalClose(){
+    winModal.style.setProperty('display','none');
+}
+
 //Enemies
 function enemy(name,hp,damage,type,photo){
     return{
@@ -311,11 +457,164 @@ function enemy(name,hp,damage,type,photo){
         damage: damage,
         type: type,
         photo: photo,
-        battle: function(){}
+        oneManBattle: function(){
+            attackItemsDefault()
+            main.style.setProperty("background","url('oneMan.jpg')");
+            main.style.setProperty('background-size','cover');
+
+            health=this.hp;
+            damage=this.damage;
+
+            attackListeners();
+            run.addEventListener('click',runFunction);
+        },
+        groupOfMenBattle: function(){
+            attackItemsDefault()
+            main.style.setProperty("background","url('groupOfMen.jpg')");
+            main.style.setProperty('background-size','cover');
+
+            health=this.hp;
+            damage=this.damage;
+
+            attackListeners();
+            run.addEventListener('click',runFunction);
+        },
+        enemyPatrolBattle: function(){
+            attackItemsDefault()
+            main.style.setProperty("background","url('enemyPatrol.jpg')");
+            main.style.setProperty('background-size','cover');
+
+            health=this.hp;
+            damage=this.damage;
+
+            attackListeners();
+            run.addEventListener('click',runFunction);
+        }
+    }
+}
+var oneMan=enemy('Armed man',100,5,'oneMan','oneMan.jpg');
+var groupOfMen=enemy('Group of armed men',300,10,'groupOfMen','groupOfMen.jpg');
+var enemyPatrol=enemy('Enemy patrol',450,15,'enemyPatrol','enemyPatrol.jpg');
+
+function attackListeners(){
+    fastAttack.addEventListener('click',fastAttackFunction);
+    powerAttack.addEventListener('click',powerAttackFunction);
+    
+}
+function attackItemsDefault(){
+    for(let x=0;x<placeItem.length;x++){
+        placeItem[x].style.setProperty('display','none');
+    }
+    disableButtons();
+    enemyPatrolModal.style.setProperty('display','block');
+    setTimeout(enemyPatrolDanger,5000);
+    attackEnable();
+    enemyContainer.style.setProperty('display','block');
+}
+
+function fastAttackFunction(){
+    var fastAttakSound;
+    var rand=Math.random()*10;
+    if(rand<3){
+        fastAttakSound=new Audio('gunSound.mp3');
+    }
+    if((rand>2)&&(rand<7)){
+        fastAttakSound=new Audio('gun2Sound.mp3');
+    }
+    if(rand>6){
+        fastAttakSound=new Audio('gun3Sound.mp3');
+    }
+    fastAttakSound.volume=0.5;
+    fastAttakSound.play();
+
+    attack=(Math.random()*10*itemDamage.getAttribute('value')).toFixed(0);
+    health-=attack;
+
+    damage=(Math.random()*7).toFixed(0);
+    damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
+    realDamage=damage-damageReduct;
+    myHealth-=realDamage;
+
+    damageItemsInfo();
+}
+function powerAttackFunction(){
+    var fastAttakSound;
+    var rand=Math.random()*10;
+    if(rand<3){
+        fastAttakSound=new Audio('powerSound.mp3');
+    }
+    if((rand>2)&&(rand<7)){
+        fastAttakSound=new Audio('power2Sound.mp3');
+    }
+    if(rand>6){
+        fastAttakSound=new Audio('power3Sound.mp3');
+    }
+    fastAttakSound.volume=0.5;
+    fastAttakSound.play();
+
+    attack=(Math.random()*10*itemDamage.getAttribute('value')).toFixed(0);
+    health-=attack;
+
+    damageItemsInfo();
+}
+
+function damageItemsInfo(){
+    damage=(Math.random()*5).toFixed(0);
+    damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
+    realDamage=damage-damageReduct;
+    myHealth-=realDamage;
+
+    healthIndicator.setAttribute('value',myHealth);
+    myHealthWidth=myHealth+'%';
+    healthIndicator.style.setProperty('width',myHealthWidth);
+
+    enemyHealthBar.setAttribute('value',health);
+    healthWidth=health+'%';
+    enemyHealthBar.style.setProperty('width',healthWidth);
+
+    console.log(health);
+    console.log(myHealth);
+
+    winOrDead();
+    attackDisable();
+    setTimeout(attackEnable,500);
+}
+function runFunction(){
+    var rand=(Math.random()*10).toFixed(0);
+    var runSound=new Audio('runSound.mp3');
+    var runDamage=myHealth-20;
+    var runRealDamage=runDamage+'%';
+    if(rand<5){
+        runSound.play();
+        main.style.setProperty('background',"url('city.jpg')");
+        enemyContainer.style.setProperty('display','none');
+        attackDisable();
+        enableButtons();
+    }else{
+        healthIndicator.style.setProperty('width',runRealDamage);
     }
 }
 
-var oneEnemy=enemy('One enemy',100,5,'oneEnemy');
+function winOrDead(){
+    if(myHealth<=0){
+        var deadSound=new Audio('dead.mp3');
+        deadSound.play();
+        deadModal.style.setProperty('display','block');
+        setTimeout(reload,5000);
+    }
+    if(health<=0){
+        winModal.style.setProperty('display','block');
+        setTimeout(winModalClose,5000);
+        enableButtons();
+        main.style.setProperty("background","url('city.jpg')");
+        main.style.setProperty('background-size','cover');
+        attackDisable();
+        enemyContainer.style.setProperty('display','none');
+    }
+}
+function reload(){
+    window.location.reload();
+}
 
 //Sound Items
 var bodyClick=document.querySelector('body');
@@ -352,12 +651,7 @@ function searchSound(){
 bodyClick.addEventListener('click',clickSound);
 musicSound.addEventListener('click',themeMusic);
 
-//Equipment Items
-var eqButton=document.querySelector('.eqButton');
-var eqModal=document.querySelector('.eqModal');
-var eqContainer=document.querySelector('.eqContainer');
-var eqClose=document.querySelector('.eqClose');
-
+//Eq Sripts
 function openEq(){
     //Hide Items
     hideItems();
@@ -370,12 +664,7 @@ function openEq(){
 
 eqButton.addEventListener('click',openEq);
 
-//Map Items
-var mapButton=document.querySelector('.mapButton');
-var mapModal=document.querySelector('.mapModal');
-var mapPoint=document.querySelectorAll('.mapPoint');
-var mapClose=document.querySelector('.mapClose');
-
+//Map Scripts
 function openMap(){
     //Hide Items
     hideItems();
@@ -468,19 +757,7 @@ function openHome(){
 
 goHome.addEventListener('click',openHome);
 
-//Search Items
-var pointBtn=document.querySelectorAll('.pointBtn');
-var searchModal=document.querySelectorAll('.searchModal');
-var searchBtn=document.querySelectorAll('.searchBtn');
-var searchProgress=document.querySelectorAll('.searchProgress');
-var foodChance=document.querySelectorAll('.foodChance');
-var valChance=document.querySelectorAll('.valChance');
-var weaponChance=document.querySelectorAll('.weaponChance');
-var clothesChance=document.querySelectorAll('.clothesChance');
-var dangerChance=document.querySelectorAll('.dangerChance');
-var dangerModal=document.querySelector('.dangerModal');
-var sniperModal=document.querySelector('.sniperModal');
-
+//Search Scripts
 function hideSearch(){
     for(let x=0;x<searchModal.length;x++){
         searchModal[x].style.setProperty('display','none');
@@ -657,24 +934,11 @@ function search(e){
         if(findDanger>0){
             if(findDanger<=dangerPercent){
                 if(howDanger<=5){
-                    // dangerModal.style.setProperty('display','block');
-                    // dangerTxt=document.createTextNode('You found armed man');
-                    // dangerModal.appendChild(dangerTxt);
-                    oneManDanger();
+                    oneMan.oneManBattle();
                 }if((howDanger>5)&&(howDanger<7)){
-                    // dangerModal.style.setProperty('display','block');
-                    // dangerTxt=document.createTextNode('You found group of armed men');
-                    // dangerModal.appendChild(dangerTxt);
-                    //someManDanger();
-                    sniperModal.style.setProperty('display','block');
-                    setTimeout(sniperDanger,5000);
+                    groupOfMen.groupOfMenBattle();
                 }if((howDanger>7)&&(howDanger<10)){
-                    // dangerModal.style.setProperty('display','block');
-                    // dangerTxt=document.createTextNode('You found enemy army patrol');
-                    // dangerModal.appendChild(dangerTxt);
-                    //enemyArmyDanger();
-                    sniperModal.style.setProperty('display','block');
-                    setTimeout(sniperDanger,5000);
+                    enemyPatrol.enemyPatrolBattle();
                 }if(howDanger>9){
                     sniperModal.style.setProperty('display','block');
                     setTimeout(sniperDanger,5000);
@@ -692,71 +956,6 @@ for(let x=0;x<searchBtn.length;x++){
     searchBtn[x].index=x;
     searchBtn[x].addEventListener('click',search);
 }
-
-//Add to Eq
-
-//Human Items
-//Human
-var head=document.querySelector('.head');
-var leftArm=document.querySelector('.leftArm');
-var rightArm=document.querySelector('.rightArm');
-var body=document.querySelector('.body');
-var legs=document.querySelector('.legs');
-//Deafult Item Squares
-var defaultWeaponImg=document.querySelector('.defaultWeaponImg');
-var defaultHeadArmorImg=document.querySelector('.defaultHeadArmorImg');
-var defaultBodyArmorImg=document.querySelector('.defaultBodyArmorImg');
-var defaultLegsArmorImg=document.querySelector('.defaultLegsArmorImg');
-var defaultFootArmorImg=document.querySelector('.defaultFootArmorImg');
-//Armor
-var armor=document.querySelectorAll('.armor');
-var headArmor=document.querySelector('.headArmor');
-var bodyArmor=document.querySelector('.bodyArmor');
-var legsArmor=document.querySelector('.legsArmor');
-var footArmor=document.querySelector('.footArmor');
-//Add Armor
-var headArmorAdd=document.querySelector('.headArmorAdd');
-var bodyArmorAdd=document.querySelector('.bodyArmorAdd');
-var legsArmorAdd=document.querySelector('.legsArmorAdd');
-var footArmorAdd=document.querySelector('.footArmorAdd');
-//Weapon
-var weaponSquare=document.querySelector('.weapon');
-var weaponItem=document.querySelectorAll('.weaponItem');
-var usingWeapon=document.querySelector('.usingWeapon');
-var weaponAdd=document.querySelector('.weaponAdd');
-//Item Stats
-var itemDamage=document.querySelector('.itemDamage');
-var dmg=document.querySelector('.dmg');
-var cricitaclDmg=document.querySelector('.criticalDmg');
-var itemCriticalChance=document.querySelector('.itemCriticalChance');
-var itemArmor=document.querySelector('.itemArmor');
-//Weapon Indicators
-var weaponDamage;
-var weaponCriticalChance;
-var itemDamageTxt;
-var itemCriticalChanceTxt;
-//Armor Armor
-var itemArmorTxt;
-var headArmorArmor=0;
-var bodyArmorArmor=0;
-var legsArmorArmor=0;
-var footArmorArmor=0;
-//Armor Indicators
-var headArmorTxt;
-var bodyArmorTxt;
-var legsArmorTxt;
-var footArmorTxt;
-var armorValue=document.querySelector('.armorValue');
-//Armor Slots
-var headArmorSlot=document.querySelector('.headArmorSlot');
-var bodyArmorSlot=document.querySelector('.bodyArmorSlot');
-var legsArmorSlot=document.querySelector('.legsArmorSlot');
-var footArmorSlot=document.querySelector('.footArmorSlot');
-//Armor 0 Value
-var headArmorValue=document.querySelector('.armorHeadValue');
-var bodyArmorValue=document.querySelector('.armorBodyValue');
-var legsArmorValue=document.querySelector('.armorLegsValue');
-var footArmorValue=document.querySelector('.armorFootValue');
 
 //Weapon Scripts
 function addWeaponToEq(e){
@@ -858,6 +1057,7 @@ function addHeadArmorToEq(e){
         //Armor Indicator
         headArmorTxt=document.createTextNode(headArmorArmor);
         headArmorSlot.appendChild(headArmorTxt);
+        headArmorSlot.setAttribute('value',headArmorArmor);
         headArmorValue.style.setProperty('display','none');
 
         cloneHeadArmor.onclick=deleteHeadArmorFromEq;
@@ -907,6 +1107,7 @@ function addBodyArmorToEq(e){
         //Armor Indicator
         bodyArmorTxt=document.createTextNode(bodyArmorArmor);
         bodyArmorSlot.appendChild(bodyArmorTxt);
+        bodyArmorSlot.setAttribute('value',bodyArmorArmor);
         bodyArmorValue.style.setProperty('display','none');
 
         cloneBodyArmor.onclick=deleteBodyArmorFromEq;
@@ -956,6 +1157,7 @@ function addLegsArmorToEq(e){
         //Armor Indicator
         legsArmorTxt=document.createTextNode(legsArmorArmor);
         legsArmorSlot.appendChild(legsArmorTxt);
+        legsArmorSlot.setAttribute('value',legsArmorArmor);
         legsArmorValue.style.setProperty('display','none');
 
         cloneLegsArmor.onclick=deleteLegsArmorFromEq;
@@ -1005,6 +1207,7 @@ function addFootArmorToEq(e){
         //Armor Indicator
         footArmorTxt=document.createTextNode(footArmorArmor);
         footArmorSlot.appendChild(footArmorTxt);
+        footArmorSlot.setAttribute('value',footArmorArmor);
         footArmorValue.style.setProperty('display','none');
 
         cloneFootArmor.onclick=deleteFootArmorFromEq;
@@ -1027,20 +1230,3 @@ function deleteFootArmorFromEq(e){
         cloneFootArmorReverse.onclick=addFootArmorToEq;
     }
 }
-
-//Attack buttons
-var wpnDmg=itemDamage.getAttribute('value')
-var fastAttack=document.querySelector('.fastAttack');
-var powerAttack=document.querySelector('.powerAttack');
-var defend=document.querySelector('.defend');
-var run=document.querySelector('.run');
-var enemyOneManHp=100;
-var attack=Math.random()*10*wpnDmg;
-function fastAttackFunction(){
-    attack=Math.random()*10*itemDamage.getAttribute('value');
-}
-
-fastAttack.addEventListener('click',fastAttackFunction);
-
-//Danger Functions
-var atk=document.querySelector('.atk');
