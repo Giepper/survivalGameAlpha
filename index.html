@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+    <script src="chance.js"></script>
+    <title>Survival</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="bars">
+                <div class="healthIndicator" value="100"></div>
+                <div class="defenseIndicator" value="4"></div>
+                <div class="Money" value="0"></div>
+                <div class="stats">
+                    <p class="itemStats">Damage: <span class="itemDamage" value="1"><span class="dmg">1</span></span></p>
+                    <p class="itemStats">Critical Chance: <span class="itemCriticalChance" value="1"><span class="criticalDmg">1</span></span></p>
+                    <p class="itemStats">Head armor: <span class="headArmorSlot" value="0"><span class="armorHeadValue">0</span></span></p>
+                    <p class="itemStats">Body armor: <span class="bodyArmorSlot" value="0"><span class="armorBodyValue">0</span></span></p>
+                    <p class="itemStats">Legs armor: <span class="legsArmorSlot" value="0"><span class="armorLegsValue">0</span></span></p>
+                    <p class="itemStats">Foot armor: <span class="footArmorSlot" value="0"><span class="armorFootValue">0</span></span></p>
+                    <p class="itemStats">Armor: <span class="itemArmor" value="0"><span class="armorValue">0</span></span></p>
+                </div>
+            </div>
+            <div class="human">
+                <div class="head square">
+                    <img class="humanSquare" src="human-head-svgrepo-com.svg">
+                </div>
+                <div class="squareFlex">
+                    <div class="leftArm inline square">
+                        <img class="humanSquare" src="arm-svgrepo-com.svg">
+                    </div>
+                    <div class="body inline square">
+                        <img class="humanSquare" src="trench-body-armor-svgrepo-com.svg">
+                    </div>
+                    <div class="rightArm inline square">
+                        <img class="humanSquare" src="arm-svgrepo-com.svg">
+                    </div>
+                </div>
+                <div class="legs square">
+                    <img class="humanSquare" src="leg-armor-svgrepo-com.svg">
+                </div>
+                <div class="armorFlex">
+                    <div class="armor headArmor square">
+                        <div class="headArmorAdd"></div>
+                        <img class="humanSquare defaultHeadArmorImg" src="cap-svgrepo-com.svg">
+                    </div>
+                    <div class="armor bodyArmor square">
+                        <div class="bodyArmorAdd"></div>
+                        <img class="humanSquare defaultBodyArmorImg" src="shirt-svgrepo-com.svg">
+                    </div>
+                    <div class="armor legsArmor square">
+                        <div class="legsArmorAdd"></div>
+                        <img class="humanSquare defaultLegsArmorImg" src="pants-svgrepo-com.svg">
+                    </div>
+                    <div class="armor footArmor square">
+                        <div class="footArmorAdd"></div>
+                        <img class="humanSquare defaultFootArmorImg" src="shoes-svgrepo-com.svg">
+                    </div>
+                    <div class="weapon square">
+                        <div class="weaponAdd"></div>
+                        <img class="humanSquare defaultWeaponImg" src="gun-svgrepo-com.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="equipmentAndMap">
+                <button class="eqButton btn">Equipment</button>
+                <button class="mapButton btn">Map</button>
+            </div>
+        </div>
+        <div class="centerEdit">
+            <div class="main">
+                <div class="foundModal"></div>
+                <div class="eqModal">
+                    <div class="eqTitle">Equipment</div>
+                    <div class="eqContainer"></div>
+                </div>
+                <div class="mapModal">
+                    <button class="mapClose pointBtn mapPoint">Close</button>
+                    <button class="goCity pointBtn mapPoint">City</button>
+                    <button class="goSuburbs pointBtn mapPoint">Suburbs</button>
+                    <button class="goForest pointBtn mapPoint">Forest</button>
+                    <button class="goHome pointBtn mapPoint">Home</button>
+                </div>
+                <!-- <div class="dangerModal">
+                    <button class="fightButton">Fight</button>
+                    <button class="runButton">Run</button>
+                </div> -->
+                <div class="sniperModal dangerModal">Enemy sniper shot you. You receive 50hp damage</div>
+                <div class="city">
+                    <button class="flats cityPoint pointBtn">Flats</button>
+                    <div class="searchModal" id="flatsModal">
+                        <button class="btn searchBtn" id="flatsBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance30" value="30">Food chance: 30%</span><br>
+                            <span class="valChance valChance10" value="10">Valuable items chance: 10%</span><br>
+                            <span class="clothesChance clothesChance5" value="5">Clothes chance: 5%</span><br>
+                            <span class="weaponChance weaponChance1" value="1">Weapon chance: 1%</span><br>
+                            <span class="dangerChance dangerChance15" value="15">Danger chance: 15%</span>
+                        </p>
+                    </div>
+                    <button class="sniperSquare cityPoint pointBtn">Sniper square</button>
+                    <div class="searchModal" id="sniperSquareModal">
+                        <button class="btn searchBtn" id="sniperSquareBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance15" value="15">Food chance: 15%</span><br>
+                            <span class="valChance valChance50" value="50">Valuable items chance: 50%</span><br>
+                            <span class="clothesChance clothesChance15" value="15">Clothes chance: 15%</span><br>
+                            <span class="weaponChance weaponChance20" value="20">Weapon chance: 20%</span><br>
+                            <span class="dangerChance dangerChance75" value="75">Danger chance: 75%</span>
+                        </p>
+                    </div>
+                    <button class="market cityPoint pointBtn">Market</button>
+                    <div class="searchModal" id="marketModal">
+                        <button class="btn searchBtn" id="marketBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance75" value="75">Food chance: 75%</span><br>
+                            <span class="valChance valChance5" value="5">Valuable items chance: 5%</span><br>
+                            <span class="clothesChance clothesChance1" value="1">Clothes chance: 1%</span><br>
+                            <span class="weaponChance weaponChance1" value="1">Weapon chance: 1%</span><br>
+                            <span class="dangerChance dangerChance30" value="30">Danger chance: 30%</span>
+                        </p>
+                    </div>
+                    <button class="frontline cityPoint pointBtn">Frontline</button>
+                    <div class="searchModal" id="frontlineModal">
+                        <button class="btn searchBtn" id="frontlineBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance30" value="30">Food chance: 30%</span><br>
+                            <span class="valChance valChance70" value="70">Valuable items chance: 70%</span><br>
+                            <span class="clothesChance clothesChance60" value="60">Clothes chance: 60%</span><br>
+                            <span class="weaponChance weaponChance75" value="75">Weapon chance: 75%</span><br>
+                            <span class="dangerChance dangerChance90" value="90">Danger chance: 90%</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="suburbs">
+                    <button class="oneFamilyHouse suburbsPoint pointBtn">House</button>
+                    <div class="searchModal" id="houseModal">
+                        <button class="btn searchBtn" id="houseBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance15" value="15">Food chance: 15%</span><br>
+                            <span class="valChance valChance5" value="5">Valuable items chance: 5%</span><br>
+                            <span class="clothesChance clothesChance1" value="1">Clothes chance: 1%</span><br>
+                            <span class="weaponChance weaponChance1" value="1">Weapon chance: 1%</span><br>
+                            <span class="dangerChance dangerChance15" value="15">Danger chance: 15%</span>
+                        </p>
+                    </div>
+                    <button class="shop suburbsPoint pointBtn">Shop</button>
+                    <div class="searchModal" id="shopModal">
+                        <button class="btn searchBtn" id="shopBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance50" value="50">Food chance: 50%</span><br>
+                            <span class="valChance valChance5" value="5">Valuable items chance: 5%</span><br>
+                            <span class="clothesChance clothesChance0" value="0">Clothes chance: 0%</span><br>
+                            <span class="weaponChance weaponChance0" value="0">Weapon chance: 0%</span><br>
+                            <span class="dangerChance dangerChance15" value="15">Danger chance: 15%</span>
+                        </p>
+                    </div>
+                    <button class="plot suburbsPoint pointBtn">Plot</button>
+                    <div class="searchModal" id="plotModal">
+                        <button class="btn searchBtn" id="plotBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance20" value="20">Food chance: 20%</span><br>
+                            <span class="valChance valChance5" value="5">Valuable items chance: 5%</span><br>
+                            <span class="clothesChance clothesChance20" value="20">Clothes chance: 20%</span><br>
+                            <span class="weaponChance weaponChance5" value="5">Weapon chance: 5%</span><br>
+                            <span class="dangerChance dangerChance20" value="20">Danger chance: 20%</span>
+                        </p>
+                    </div>
+                    <button class="highway suburbsPoint pointBtn">Highway</button>
+                    <div class="searchModal" id="highwayModal">
+                        <button class="btn searchBtn" id="highwayBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance10" value="10">Food chance: 10%</span><br>
+                            <span class="valChance valChance20" value="20">Valuable items chance: 20%</span><br>
+                            <span class="clothesChance clothesChance10" value="10">Clothes chance: 10%</span><br>
+                            <span class="weaponChance weaponChance15" value="15">Weapon chance: 15%</span><br>
+                            <span class="dangerChance dangerChanc30" value="30">Danger chance: 30%</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="forest">
+                    <button class="hunt forestPoint pointBtn">Hunt</button>
+                    <div class="searchModal" id="huntModal">
+                        <button class="btn searchBtn" id="huntBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance20" value="20">Food chance: 20%</span><br>
+                            <span class="valChance valChance0" value="0">Valuable items chance: 0%</span><br>
+                            <span class="clothesChance clothesChance0" value="0">Clothes chance: 0%</span><br>
+                            <span class="weaponChance weaponChance0" value="0">Weapon chance: 0%</span><br>
+                            <span class="dangerChance dangerChanc0" value="0">Danger chance: 0%</span>
+                        </p>
+                    </div>
+                    <button class="mushroms forestPoint pointBtn">Mushroms</button>
+                    <div class="searchModal" id="mushromsModal">
+                        <button class="btn searchBtn" id="mushromshBtn">Search</button>
+                        <div class="searchProgress"></div>
+                        <p class="chance">
+                            <span class="foodChance foodChance50" value="50">Food chance: 50%</span><br>
+                            <span class="valChance valChance0" value="0">Valuable items chance: 0%</span><br>
+                            <span class="clothesChance clothesChance10" value="10">Clothes chance: 0%</span><br>
+                            <span class="weaponChance weaponChance0" value="0">Weapon chance: 0%</span><br>
+                            <span class="dangerChance dangerChance2" value="2">Danger chance: 2%</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="secretPlace"></div>
+                <div class="home">
+                    <button class="trader homePoint pointBtn">Trader</button>
+                    <button class="hospital homePoint pointBtn">Hospital</button>
+                    <button class="bed homePoint pointBtn">Bed</button>
+                </div>
+            </div>
+            <div class="down">
+                <div class="attackButtons">
+                    <button class="fastAttack atk" disabled>Fast attack</button>
+                    <button class="powerAttack atk" disabled>Power attack</button>
+                    <button class="defend atk" disabled>Defend</button>
+                    <button class="run atk" disabled>Run</button>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <button class="sound btn">
+                <img class="soundImg" src="sound-off-svgrepo-com.svg">
+            </button>
+            <div class="foundItemInfo"></div>
+        </div>
+    </div>
+</body>
+<script src="skrypt.js"></script>
+</html>

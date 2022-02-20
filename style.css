@@ -1,0 +1,312 @@
+*{
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: crosshair;
+}
+body{
+    background-color: #343434;
+    margin: 0;
+}
+div.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+div.left{
+    flex-basis: 20%;
+    background-color: #444;
+    height: 100vh;
+}
+div.bars{
+    width: 80%;
+    height: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.healthIndicator{
+    width: 100%;
+    height: 15px;
+    background-color: green;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+}
+div.defenseIndicator{
+    width: 100%;
+    height: 15px;
+    background-color: goldenrod;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.square{
+    background-color: rgb(39, 125, 223);
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+}
+div.squareFlex{
+    display: flex;
+}
+img.humanSquare{
+    width: 100%;
+}
+div.rightArm{
+    transform: scaleX(-1);
+}
+div.armorFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+div.armor{
+    background-color: #aaa;
+    border: 1px solid #333;
+}
+div.main{
+    flex-basis: 60%;
+    height: 80vh;
+    background: url('city.jpg');
+}
+div.city{
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background: url('city.jpg');
+    display: none;
+}
+div.suburbs{
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background: url('suburbs.jpg');
+    background-size: cover;
+    display: none;
+}
+div.forest{
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background: url('forest.jpg');
+    background-size: cover;
+    display: none;
+}
+div.home{
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background: url('home.jpg');
+    background-size: cover;
+    display: none;
+}
+div.down{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+div.centerEdit{
+    width: 60%;
+}
+.pointBtn{
+    display: none;
+}
+div.equipmentAndMap{
+    text-align: center;
+    margin-top: 2%;
+}
+div.attackButtons{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+button{
+    padding: 5%;
+    border: none;
+    background-color: #888;
+}
+button:hover{
+    background-color: #999;
+    transition: .5s;
+}
+.sound{
+    padding: 1%;
+}
+div.eqModal{
+    background-color: #222;
+    width: 100%;
+    height: 100%;
+    z-index: 60;
+    display: none;
+}
+div.eqContainer{
+    width: 80%;
+    height: 80%;
+    border: 3px solid #555;
+    margin: auto;
+    overflow-y: scroll;
+}
+div.eqContainer::-webkit-scrollbar{
+    width: 10px;
+}
+div.eqContainer::-webkit-scrollbar-thumb{
+    background: #fff;
+}
+div.eqContainer::-webkit-scrollbar-track{
+    background-color: #aaa;
+}
+.eqTitle{
+    padding: 1%;
+    color: #fff;
+    text-align: center;
+    font-size: 120%;
+}
+h1.eqTitle{
+    position: absolute;
+}
+div.mapModal{
+    background: url('map.png');
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    display: none;
+}
+button.pointBtn{
+    position: absolute;
+    padding: 1%;
+}
+/*Map*/
+.goCity{
+    margin-top: 25%;
+    margin-left: 35%;
+}
+.goSuburbs{
+    margin-top: 20%;
+    margin-left: 50%;
+}
+.goForest{
+    margin-top: 25%;
+    margin-left: 1%;
+}
+.goHome{
+    margin-top: 1%;
+    margin-left: 25%;
+}
+/*City*/
+.flats{
+    margin-top: 10%;
+    margin-left: 10%;
+}
+.sniperSquare{
+    margin-top: 25%;
+    margin-left: 50%;
+}
+.market{
+    margin-top: 30%;
+    margin-left: 35%;
+}
+.frontline{
+    margin-top: 5%;
+    margin-left: 50%;
+}
+/*Suburbs*/
+.oneFamilyHouse{
+    margin-top: 5%;
+    margin-left: 25%;
+}
+.shop{
+    margin-top: 25%;
+    margin-left: 5%;
+}
+.plot{
+    margin-top: 20%;
+    margin-left: 50%;
+}
+.highway{
+    margin-top: 15%;
+    margin-left: 10%;
+}
+/*Forest*/
+.hunt{
+    margin-top: 10%;
+    margin-left: 15%;
+}
+.mushroms{
+    margin-top: 30%;
+    margin-left: 50%;
+}
+/*Home*/
+.trader{
+    margin-top: 25%;
+    margin-left: 10%;
+}
+.hospital{
+    margin-top: 23%;
+    margin-left: 54%;
+}
+.bed{
+    margin-top: 10%;
+    margin-left: 48%;
+}
+.searchModal{
+    position: absolute;
+    background-color: #333;
+    width: 20%;
+    margin-top: 15%;
+    margin-left: 20%;
+    padding: 1%;
+    color: #777;
+    z-index: 60;
+    display: none;
+}
+.elementJustify{
+    width: 25%;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+.searchProgress{
+    background-color: green;
+    height: 10px;
+    width: 100%;
+    margin-top: 1%;
+    animation-duration: 5s;
+    animation-timing-function: ease-out;
+    display: none;
+}
+@keyframes progressBar{
+    0%{opacity: 1;width: 1%;}
+    100%{opacity: 1;width: 100%}
+}
+.foundItemInfo{
+    width: 19vw;
+    height: 20%;
+    background-color: #777;
+    padding: 1%;
+    display: none;
+    animation-name: itemInfoOpen;
+    animation-duration: 5s;
+}
+@keyframes itemInfoOpen{
+    0%{opacity: 0.2;transform: translateX(-50%);}
+    30%{opacity: 1;transform: translateX(0);}
+    100%{opacity: 0;}
+}
+.weaponItem{
+    z-index: 500;
+}
+p.itemStats{
+    margin: 0;
+    color: #fff;
+    font-weight: bold;
+}
+.dangerModal{
+    position: absolute;
+    background-color: #333;
+    width: 30%;
+    margin-top: 10%;
+    margin-left: 25%;
+    padding: 1%;
+    color: #777;
+    z-index: 70;
+    display: none;
+}
