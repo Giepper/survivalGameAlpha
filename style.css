@@ -46,6 +46,13 @@ div.square{
     margin-right: auto;
     margin-bottom: 1%;
 }
+div.humanDamaged{
+    background-color: red;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+}
 div.squareFlex{
     display: flex;
 }

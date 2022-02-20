@@ -113,7 +113,7 @@ var oneManModal=document.querySelector('.oneManModal');
 var groupOfMenModal=document.querySelector('.groupOfMenModal');
 var enemyPatrolModal=document.querySelector('.enemyPatrolModal');
 
-//Attack buttons
+//Attack Buttons
 var wpnDmg=itemDamage.getAttribute('value')
 var fastAttack=document.querySelector('.fastAttack');
 var powerAttack=document.querySelector('.powerAttack');
@@ -121,6 +121,19 @@ var defend=document.querySelector('.defend');
 var run=document.querySelector('.run');
 var enemyOneManHp=100;
 var attack=Math.random()*10*wpnDmg;
+
+//Health Items
+var healthIndicator=document.querySelector('.healthIndicator');
+var myHealthWidth;
+var enemyContainer=document.querySelector('.enemyContainer');
+var enemyHealthBar=document.querySelector('.enemyHealthBar');
+var winModal=document.querySelector('.winModal');
+var deadModal=document.querySelector('.deadModal');
+var health;
+var healthWidth;
+var damage;
+var damageReduct;
+var realDamage;
 
 //Danger Functions
 var atk=document.querySelectorAll('.atk');
@@ -211,8 +224,11 @@ function food(foodName,price,nutrition,photo){
             newEl.setAttribute('src',this.photo);
             newEl.setAttribute('value',this.price);
             newEl.setAttribute('id',chance.guid());
+            newEl.setAttribute('nutrition',this.nutrition);
             newEl.classList.add('elementJustify');
+            newEl.classList.add('foodItem');
             eqContainer.appendChild(newEl);
+            newEl.onclick=eatFood;
 
             //Add To Info
             var newBr=document.createElement('br');
@@ -242,6 +258,27 @@ function food(foodName,price,nutrition,photo){
         }
     };
 }
+
+function eatFood(e){
+    var txt=document.createTextNode('You have too much hp');
+    var hlth=parseInt(healthIndicator.getAttribute('value'))+parseInt(e.target.getAttribute('value'));
+    var hlthRel=hlth+'%';
+    if(parseInt(healthIndicator.getAttribute('value'))<100){
+        //if(parseInt(healthIndicator.getAttribute('value'))<=e.target.getAttribute('nutrition')){
+            healthIndicator.style.setProperty('width',hlthRel);
+            healthIndicator.setAttribute('value',hlthRel);
+            e.target.remove();
+        //}
+    }else{
+        foundItemInfo.appendChild(txt);
+        foundItemInfo.style.setProperty('display','block');
+        setTimeout(closeIt,5000);
+        function closeIt(){
+            foundItemInfo.style.setProperty('display','none');
+            foundItemInfo.removeChild(txt);
+        }
+    }
+}
 var can=food('can',10,5,'can-svgrepo-com.svg');
 var water=food('water',5,2,'water-svgrepo-com.svg');
 var bread=food('bread',15,10,'bread-svgrepo-com.svg');
@@ -264,6 +301,7 @@ function valItems(itemName,price,photo){
             newEl.setAttribute('value',this.price);
             newEl.setAttribute('id',chance.guid());
             newEl.classList.add('elementJustify');
+            newEl.classList.add('valuableItem');
             eqContainer.appendChild(newEl);
 
             //Add To Info
@@ -350,9 +388,9 @@ function weapon(itemName,price,damage,criticalChance,photo){
     }
 }
 var pipe=weapon('pipe',0,5,5,'bat-svgrepo-com.svg');
-var knife=weapon('knife',150,10,15,'knife-svgrepo-com.svg');
-var axe=weapon('axe',300,12,17,'axe-svgrepo-com.svg');
-var gun=weapon('gun',700,15,30,'gunWeapon-svgrepo-com.svg');
+var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
+var axe=weapon('axe',300,9,17,'axe-svgrepo-com.svg');
+var gun=weapon('gun',700,11,30,'gunWeapon-svgrepo-com.svg');
 // pipe.foundItem();
 // knife.foundItem();
 // axe.foundItem();
@@ -433,18 +471,6 @@ var militaryShoes=clothes('military shoes','foot',200,3,'boots-svgrepo-com.svg')
 // militaryTrousers.foundItem();
 // militaryShoes.foundItem();
 
-var healthIndicator=document.querySelector('.healthIndicator');
-var myHealthWidth;
-var enemyContainer=document.querySelector('.enemyContainer');
-var enemyHealthBar=document.querySelector('.enemyHealthBar');
-var winModal=document.querySelector('.winModal');
-var deadModal=document.querySelector('.deadModal');
-var health;
-var healthWidth;
-var damage;
-var damageReduct;
-var realDamage;
-
 function winModalClose(){
     winModal.style.setProperty('display','none');
 }
@@ -462,6 +488,9 @@ function enemy(name,hp,damage,type,photo){
             main.style.setProperty("background","url('oneMan.jpg')");
             main.style.setProperty('background-size','cover');
 
+            oneManModal.style.setProperty('display','block');
+            setTimeout(oneManDanger,5000);
+
             health=this.hp;
             damage=this.damage;
 
@@ -473,6 +502,9 @@ function enemy(name,hp,damage,type,photo){
             main.style.setProperty("background","url('groupOfMen.jpg')");
             main.style.setProperty('background-size','cover');
 
+            groupOfMenModal.style.setProperty('display','block');
+            setTimeout(groupOfMenDanger,5000);
+
             health=this.hp;
             damage=this.damage;
 
@@ -483,6 +515,9 @@ function enemy(name,hp,damage,type,photo){
             attackItemsDefault()
             main.style.setProperty("background","url('enemyPatrol.jpg')");
             main.style.setProperty('background-size','cover');
+
+            enemyPatrolModal.style.setProperty('display','block');
+            setTimeout(enemyPatrolDanger,5000);
 
             health=this.hp;
             damage=this.damage;
@@ -506,8 +541,6 @@ function attackItemsDefault(){
         placeItem[x].style.setProperty('display','none');
     }
     disableButtons();
-    enemyPatrolModal.style.setProperty('display','block');
-    setTimeout(enemyPatrolDanger,5000);
     attackEnable();
     enemyContainer.style.setProperty('display','block');
 }
@@ -558,7 +591,35 @@ function powerAttackFunction(){
     damageItemsInfo();
 }
 
+var pointHumanRandom;
+var pointHumanRandomDamage;
+
 function damageItemsInfo(){
+    pointHumanRandom=(Math.random()*10).toFixed(0);
+    pointHumanRandomDamage=(Math.random()*10).toFixed(0);
+    if(pointHumanRandom<2){
+       if(pointHumanRandomDamage<2){
+           body.classList.add('humanDamaged');
+           body.classList.remove('square');
+       } 
+       if((pointHumanRandomDamage>1)&&pointHumanRandomDamage<5){
+            leftArm.classList.add('humanDamaged');
+            leftArm.classList.remove('square');
+        }
+        if((pointHumanRandomDamage>4)&&pointHumanRandomDamage<7){
+            rightArm.classList.add('humanDamaged');
+            rightArm.classList.remove('square');
+        }
+        if((pointHumanRandomDamage>6)&&pointHumanRandomDamage<9){
+            legs.classList.add('humanDamaged');
+            legs.classList.remove('square');
+        }
+        if(pointHumanRandomDamage>8){
+            head.classList.add('humanDamaged');
+            head.classList.remove('square');
+        } 
+    }
+
     damage=(Math.random()*7).toFixed(0);
     damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
     if(damageReduct>damage){
@@ -584,9 +645,10 @@ function damageItemsInfo(){
     console.log(health);
     console.log(myHealth);
 
+    // attackDisable();
+    // setTimeout(attackEnable,500);
+
     winOrDead();
-    attackDisable();
-    setTimeout(attackEnable,500);
 }
 function runFunction(){
     var rand=(Math.random()*10).toFixed(0);
