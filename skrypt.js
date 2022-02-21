@@ -889,6 +889,7 @@ function themeMusic(){
     themeMusic.play();
     themeMusic.volume=0.25;
     musicSound.id='play';
+    musicSound.setAttribute('disabled','');
 }
 function searchSound(){
     var searchAudio;
