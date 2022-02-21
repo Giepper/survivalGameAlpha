@@ -23,7 +23,6 @@
                     <p class="itemStats">Body armor: <span class="bodyArmorSlot" value="0"><span class="armorBodyValue">0</span></span></p>
                     <p class="itemStats">Legs armor: <span class="legsArmorSlot" value="0"><span class="armorLegsValue">0</span></span></p>
                     <p class="itemStats">Foot armor: <span class="footArmorSlot" value="0"><span class="armorFootValue">0</span></span></p>
-                    <p class="itemStats">Armor: <span class="itemArmor" value="0"><span class="armorValue">0</span></span></p>
                 </div>
             </div>
             <div class="human">
@@ -77,10 +76,32 @@
                 <div class="enemyContainer">
                     <div class="enemyHealthBar"></div>
                 </div>
+                <div class="homeModal hospitalModal">
+                    <p class="itemStats homeParagh">Hospital</p>
+                    <button class="cureButton">Cure</button>
+                    <div class="searchProgress"></div>
+                </div>
+                <div class="homeModal traderModal">
+                    <p class="itemStats homeParagh">Trader</p>
+                    <button class="buyButton">Buy</button>
+                    <button class="sellButton">Sell</button>
+                </div>
                 <div class="foundModal"></div>
                 <div class="eqModal">
                     <div class="eqTitle">Equipment</div>
                     <div class="eqContainer"></div>
+                </div>
+                <div class="buyModal">
+                    <div class="eqTitle">Buy</div>
+                    <div class="buyContainer">
+                        <fieldset>
+                            <legend>armor</legend>
+                            <img class="elementJustify clothesItem buyItem helmetBuy" value="300" src="helmet-svgrepo-com.svg">
+                            <img class="elementJustify clothesItem buyItem kevlarBuy" value="350" src="kevlar-vest-svgrepo-com.svg">
+                            <img class="elementJustify clothesItem buyItem trousersBuy" value="200" src="trousers-pants-svgrepo-com.svg">
+                            <img class="elementJustify clothesItem buyItem bootsBuy" value="200" src="boots-svgrepo-com.svg">
+                        </fieldset>
+                    </div>
                 </div>
                 <div class="mapModal">
                     <button class="mapClose pointBtn mapPoint">Close</button>

@@ -135,6 +135,160 @@ var damage;
 var damageReduct;
 var realDamage;
 
+//Home Items
+var homeModal=document.querySelectorAll('.homeModal');
+var trader=document.querySelector('.trader');
+var traderModal=document.querySelector('.traderModal');
+var hospital=document.querySelector('.hospital');
+var hospitalModal=document.querySelector('.hospitalModal');
+var cureButton=document.querySelector('.cureButton');
+var bed=document.querySelector('.bed');
+
+function hideHome(){
+    hospitalModal.style.setProperty('display','none');
+    traderModal.style.setProperty('display','none');
+}
+
+//Cure Functions
+function enableCure(){
+    cureButton.removeAttribute('disabled');
+}
+function openHospital(){
+    hideHome();
+    hospitalModal.style.setProperty('display','block');
+    cureButton.style.setProperty('display','block');
+}
+function cureNow(){
+    for(let x=0;x<searchProgress.length;x++){
+        searchProgress[x].style.setProperty('display','block');
+    }
+
+    var healSound=new Audio('healSound.mp3');
+    healSound.volume=0.5;
+    healSound.play();
+    cureButton.setAttribute('disabled','');
+    setTimeout(enableCure,5000);
+    setTimeout(cureNowNow,5000);
+}
+function cureNowNow(){
+    for(let x=0;x<searchProgress.length;x++){
+        searchProgress[x].style.setProperty('display','none');
+    }
+
+    head.classList.remove('humanDamaged');
+    head.classList.add('square');
+
+    leftArm.classList.remove('humanDamaged');
+    leftArm.classList.add('square');
+
+    rightArm.classList.remove('humanDamaged');
+    rightArm.classList.add('square');
+
+    body.classList.remove('humanDamaged');
+    body.classList.add('square');
+
+    legs.classList.remove('humanDamaged');
+    legs.classList.add('square')
+}
+
+hospital.addEventListener('click',openHospital);
+cureButton.addEventListener('click',cureNow);
+
+//Shop Scripts
+var elementJustify=document.querySelectorAll('.elementJustify');
+var cloneEq;
+var cloneEqItems;
+var sellItem=document.querySelectorAll('.sellItem');;
+var money=document.querySelector('.money');
+var moneyValue=document.querySelector('.moneyValue');
+var buyButton=document.querySelector('.buyButton');
+var sellButton=document.querySelector('.sellButton');
+var removeClass=document.querySelectorAll('.removeClass');
+var buyModal=document.querySelector('.buyModal');
+var buyContainer=document.querySelector('.buyContainer');
+var buyItem=document.querySelectorAll('.buyItem');
+var allValue=0;
+
+function sell(e){
+    if(e.target.classList.contains('sellItem')){
+        moneyValue.remove();
+        var createChild=document.createElement('span');
+        e.target.onclick=null
+        var moneyGet=parseInt(e.target.getAttribute('value'));
+        allValue+=moneyGet;
+        money.setAttribute('value',allValue);
+        var allMoneyValue=money.getAttribute('value');
+        var moneyTxt=document.createTextNode(allMoneyValue);
+        createChild.appendChild(moneyTxt);
+        createChild.classList.add('removeClass');
+        money.innerHTML='Money: '+allMoneyValue;
+        e.target.remove();
+    }
+}
+var buyClone;
+function buy(e){
+    if(e.target.classList.contains('buyItem')){
+        console.log('nigger');
+        // buyClone=e.target.cloneNode(true);
+        // buyClone.classList.remove('buyItem');
+        // buyClone.appendChild(eqContainer);
+        if(allValue>=e.target.getAttribute('value')){
+            allValue-=e.target.getAttribute('value');;
+            money.innerHTML='Money: '+allValue;
+            if(e.target.classList.contains('helmetBuy')){
+                helmet.foundItem();
+            }
+            if(e.target.classList.contains('kevlarBuy')){
+                ballisticCam.foundItem();
+            }
+            if(e.target.classList.contains('trousersBuy')){
+                militaryTrousers.foundItem();
+            }
+            if(e.target.classList.contains('bootsBuy')){
+                militaryShoes.foundItem();
+            }
+        }else{
+            alert("nigger");
+        }
+    }
+}
+function openBuy(){
+    hideHome();
+    hideItems();
+    buyModal.style.setProperty('display','block');
+    for(let x=0;x<elementJustify.length;x++){
+        elementJustify[x].classList.add('buyItem');
+    }
+}
+function openTrader(){
+    traderModal.style.setProperty('display','block');
+    cureButton.style.setProperty('display','none');
+}
+function openSell(){
+    hideHome();
+    hideItems();
+    eqModal.style.setProperty('display','block');
+    for(let x=0;x<elementJustify.length;x++){
+        elementJustify[x].classList.add('sellItem');
+    }
+}
+function hideTrader(){
+    for(let x=0;x<elementJustify.length;x++){
+        elementJustify[x].classList.remove('sellItem');
+    }
+    for(let x=0;x<homeModal.length;x++){
+        homeModal[x].style.setProperty('display','none');
+    }
+    buyModal.style.setProperty('display','none');
+}
+
+trader.addEventListener('click',openTrader);
+sellButton.addEventListener('click',openSell);
+buyButton.addEventListener('click',openBuy);
+for(let x=0;x<buyItem.length;x++){
+    buyItem[x].addEventListener('click',buy);
+}
+
 //Danger Functions
 var atk=document.querySelectorAll('.atk');
 function attackEnable(){
@@ -195,6 +349,7 @@ function hideItems(){
     for(let x=0;x<homePoint.length;x++){
         homePoint[x].style.setProperty('display','none');
     }
+    hideTrader();
 
     //Hide Eq
     eqModal.style.setProperty('display','none');
@@ -228,6 +383,8 @@ function food(foodName,price,nutrition,photo){
             newEl.classList.add('elementJustify');
             newEl.classList.add('foodItem');
             eqContainer.appendChild(newEl);
+            elementJustify=document.querySelectorAll('.elementJustify');
+            newEl.addEventListener('click',sell);
             newEl.onclick=eatFood;
 
             //Add To Info
@@ -260,24 +417,22 @@ function food(foodName,price,nutrition,photo){
 }
 
 function eatFood(e){
-    var txt=document.createTextNode('You have too much hp');
-    var hlth=parseInt(healthIndicator.getAttribute('value'))+parseInt(e.target.getAttribute('value'));
-    var hlthRel=hlth+'%';
-    if(parseInt(healthIndicator.getAttribute('value'))<100){
-        //if(parseInt(healthIndicator.getAttribute('value'))<=e.target.getAttribute('nutrition')){
-            healthIndicator.style.setProperty('width',hlthRel);
-            healthIndicator.setAttribute('value',hlthRel);
-            e.target.remove();
-        //}
-    }else{
-        foundItemInfo.appendChild(txt);
-        foundItemInfo.style.setProperty('display','block');
-        setTimeout(closeIt,5000);
-        function closeIt(){
-            foundItemInfo.style.setProperty('display','none');
-            foundItemInfo.removeChild(txt);
+        var txt=document.createTextNode('You have too much hp');
+        var hlth=parseInt(healthIndicator.getAttribute('value'))+parseInt(e.target.getAttribute('value'));
+        var hlthRel=hlth+'%';
+        if(parseInt(healthIndicator.getAttribute('value'))<100){
+                healthIndicator.style.setProperty('width',hlthRel);
+                healthIndicator.setAttribute('value',hlthRel);
+                e.target.remove();
+        }else{
+            foundItemInfo.appendChild(txt);
+            foundItemInfo.style.setProperty('display','block');
+            setTimeout(closeIt,5000);
+            function closeIt(){
+                foundItemInfo.style.setProperty('display','none');
+                foundItemInfo.removeChild(txt);
+            }
         }
-    }
 }
 var can=food('can',10,5,'can-svgrepo-com.svg');
 var water=food('water',5,2,'water-svgrepo-com.svg');
@@ -303,6 +458,8 @@ function valItems(itemName,price,photo){
             newEl.classList.add('elementJustify');
             newEl.classList.add('valuableItem');
             eqContainer.appendChild(newEl);
+            elementJustify=document.querySelectorAll('.elementJustify');
+            newEl.addEventListener('click',sell);
 
             //Add To Info
             var newBr=document.createElement('br');
@@ -356,7 +513,9 @@ function weapon(itemName,price,damage,criticalChance,photo){
             newEl.classList.add('elementJustify');
             newEl.classList.add('weaponItem');
             eqContainer.appendChild(newEl);
+            elementJustify=document.querySelectorAll('.elementJustify');
             //Attach event
+            newEl.addEventListener('click',sell);
             newEl.onclick=addWeaponToEq;
 
             //Add To Info
@@ -387,7 +546,7 @@ function weapon(itemName,price,damage,criticalChance,photo){
         },
     }
 }
-var pipe=weapon('pipe',0,5,5,'bat-svgrepo-com.svg');
+var pipe=weapon('pipe',1,5,5,'bat-svgrepo-com.svg');
 var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
 var axe=weapon('axe',300,9,17,'axe-svgrepo-com.svg');
 var gun=weapon('gun',700,11,30,'gunWeapon-svgrepo-com.svg');
@@ -412,6 +571,7 @@ function clothes(itemName,type,price,armor,photo){
             newEl.setAttribute('armor',this.armor);
             newEl.classList.add('elementJustify');
             newEl.classList.add('clothesItem');
+            newEl.addEventListener('click',sell);
             if(this.type=='head'){
                 newEl.onclick=addHeadArmorToEq;
             }
@@ -425,6 +585,7 @@ function clothes(itemName,type,price,armor,photo){
                 newEl.onclick=addFootArmorToEq;
             }
             eqContainer.appendChild(newEl);
+            elementJustify=document.querySelectorAll('.elementJustify');
 
             //Add To Info
             var newBr=document.createElement('br');
@@ -454,10 +615,10 @@ function clothes(itemName,type,price,armor,photo){
         }
     }
 }
-var cap=clothes('cap','head',0,2,'capArmor-svgrepo-com.svg');
-var shirt=clothes('shirt','body',0,3,'shirtArmor-svgrepo-com.svg');
-var jeans=clothes('jeans','legs',0,2,'jeans-svgrepo-com.svg');
-var shoes=clothes('shoes','foot',0,1,'shoesArmor-svgrepo-com.svg');
+var cap=clothes('cap','head',1,2,'capArmor-svgrepo-com.svg');
+var shirt=clothes('shirt','body',1,3,'shirtArmor-svgrepo-com.svg');
+var jeans=clothes('jeans','legs',1,2,'jeans-svgrepo-com.svg');
+var shoes=clothes('shoes','foot',1,1,'shoesArmor-svgrepo-com.svg');
 var helmet=clothes('helmet','head',300,5,'helmet-svgrepo-com.svg');
 var ballisticCam=clothes('vest','body',350,6,'kevlar-vest-svgrepo-com.svg');
 var militaryTrousers=clothes('military trousers','legs',200,4,'trousers-pants-svgrepo-com.svg');
@@ -557,10 +718,15 @@ function fastAttackFunction(){
     if(rand>6){
         fastAttakSound=new Audio('gun3Sound.mp3');
     }
-    fastAttakSound.volume=0.5;
+    fastAttakSound.volume=0.25;
     fastAttakSound.play();
 
     attack=(Math.random()*10*itemDamage.getAttribute('value')).toFixed(0);
+
+    if(rightArm.classList.contains('humanDamaged')){
+        attack=(Math.random()*5*itemDamage.getAttribute('value')).toFixed(0);
+    }
+
     health-=attack;
 
     damage=(Math.random()*6).toFixed(0);
@@ -580,15 +746,33 @@ function powerAttackFunction(){
     if(rand>6){
         fastAttakSound=new Audio('power3Sound.mp3');
     }
-    fastAttakSound.volume=0.5;
+    fastAttakSound.volume=0.25;
     fastAttakSound.play();
 
-    if(randAtk<6){
-        attack=(Math.random()*15*itemDamage.getAttribute('value')).toFixed(0);
+    if(randAtk<7){
+        attack=(Math.random()*20*itemDamage.getAttribute('value')).toFixed(0);
+
+        if(leftArm.classList.contains('humanDamaged')){
+            attack=(Math.random()*10*itemDamage.getAttribute('value')).toFixed(0);
+        }
+
         health-=attack;
     }
 
     damageItemsInfo();
+}
+var randRun=(Math.random()*10).toFixed(0);
+function runFunction(){
+    var runSound=new Audio('runSound.mp3');
+    if(randRun<6){
+        runSound.play();
+        main.style.setProperty('background',"url('city.jpg')");
+        enemyContainer.style.setProperty('display','none');
+        attackDisable();
+        enableButtons();
+    }else{
+        damageItemsInfo();
+    }
 }
 
 var pointHumanRandom;
@@ -619,8 +803,23 @@ function damageItemsInfo(){
             head.classList.remove('square');
         } 
     }
+    if(head.classList.contains('humanDamaged')){
+        powerAttack.setAttribute('disabled','');
+    }//else{
+        //powerAttack.removeAttribute('disabled');
+    //}
+    if(legs.classList.contains('humanDamaged')){
+        run.setAttribute('disabled','');
+    }//else{
+    //     run.removeAttribute('disabled','');
+    // }
 
     damage=(Math.random()*7).toFixed(0);
+
+    if(body.classList.contains('humanDamaged')){
+        damage=(Math.random()*10).toFixed(0);
+    }
+
     damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
     if(damageReduct>damage){
         realDamage=damage;
@@ -645,25 +844,12 @@ function damageItemsInfo(){
     console.log(health);
     console.log(myHealth);
 
-    // attackDisable();
-    // setTimeout(attackEnable,500);
+    // if(health>0){
+    //     attackDisable();
+    //     setTimeout(attackEnable,500);
+    // }
 
     winOrDead();
-}
-function runFunction(){
-    var rand=(Math.random()*10).toFixed(0);
-    var runSound=new Audio('runSound.mp3');
-    var runDamage=myHealth-20;
-    var runRealDamage=runDamage+'%';
-    if(rand<5){
-        runSound.play();
-        main.style.setProperty('background',"url('city.jpg')");
-        enemyContainer.style.setProperty('display','none');
-        attackDisable();
-        enableButtons();
-    }else{
-        healthIndicator.style.setProperty('width',runRealDamage);
-    }
 }
 
 function winOrDead(){
@@ -1014,8 +1200,6 @@ function search(e){
                     sniperModal.style.setProperty('display','block');
                     setTimeout(sniperDanger,5000);
                 }
-            }else{
-                alert('You didnt found any danger');
             }
         }else{
             search(e);
