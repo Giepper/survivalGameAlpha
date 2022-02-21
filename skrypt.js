@@ -228,7 +228,6 @@ function sell(e){
 var buyClone;
 function buy(e){
     if(e.target.classList.contains('buyItem')){
-        console.log('nigger');
         // buyClone=e.target.cloneNode(true);
         // buyClone.classList.remove('buyItem');
         // buyClone.appendChild(eqContainer);
@@ -248,7 +247,7 @@ function buy(e){
                 militaryShoes.foundItem();
             }
         }else{
-            alert("nigger");
+            alert("You need $"+e.target.getAttribute('value'));
         }
     }
 }
