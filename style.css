@@ -373,3 +373,20 @@ fieldset{
         height: auto;
     }
 }
+@media screen and (max-width: 600px){
+    div.left{
+        flex-basis: 100%;
+    }
+    .human{
+        width: 80%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .centerEdit{
+        flex-basis: 100%;
+    }
+    .right{
+        flex-basis: 100%;
+    }
+}
