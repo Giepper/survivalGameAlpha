@@ -546,7 +546,7 @@ function weapon(itemName,price,damage,criticalChance,photo){
         },
     }
 }
-var pipe=weapon('pipe',1,5,5,'bat-svgrepo-com.svg');
+var pipe=weapon('bat',1,5,5,'bat-svgrepo-com.svg');
 var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
 var axe=weapon('axe',300,9,17,'axe-svgrepo-com.svg');
 var gun=weapon('gun',700,11,30,'gunWeapon-svgrepo-com.svg');
