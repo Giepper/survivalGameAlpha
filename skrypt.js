@@ -498,13 +498,15 @@ function food(foodName,price,nutrition,photo){
 }
 
 function eatFood(e){
+        var eatSound=new Audio('eatSound.mp3');
         var txt=document.createTextNode('You have too much hp');
         var hlth=parseInt(healthIndicator.getAttribute('value'))+parseInt(e.target.getAttribute('value'));
         var hlthRel=hlth+'%';
         if(parseInt(healthIndicator.getAttribute('value'))<100){
-                healthIndicator.style.setProperty('width',hlthRel);
-                healthIndicator.setAttribute('value',hlthRel);
-                e.target.remove();
+            eatSound.play();
+            healthIndicator.style.setProperty('width',hlthRel);
+            healthIndicator.setAttribute('value',hlthRel);
+            e.target.remove();
         }else{
             foundItemInfo.appendChild(txt);
             foundItemInfo.style.setProperty('display','block');
@@ -515,10 +517,10 @@ function eatFood(e){
             }
         }
 }
-var can=food('can',10,5,'can-svgrepo-com.svg');
-var water=food('water',5,2,'water-svgrepo-com.svg');
 var bread=food('bread',15,10,'bread-svgrepo-com.svg');
+var can=food('can',10,5,'can-svgrepo-com.svg');
 var juice=food('juice',13,7,'juice-svgrepo-com.svg');
+var water=food('water',5,2,'water-svgrepo-com.svg');
 // can.foundItem();
 // water.foundItem();
 // bread.foundItem();
