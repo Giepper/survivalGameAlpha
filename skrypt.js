@@ -49,7 +49,7 @@ function exp(){
     }
 }
 function addExp(){
-    allExperience+=5;
+    allExperience+=10;
     exp();
 }
 
@@ -948,6 +948,7 @@ function winOrDead(){
         main.style.setProperty('background-size','cover');
         attackDisable();
         enemyContainer.style.setProperty('display','none');
+        exp();
     }
 }
 function reload(){
