@@ -948,7 +948,7 @@ function winOrDead(){
         main.style.setProperty('background-size','cover');
         attackDisable();
         enemyContainer.style.setProperty('display','none');
-        exp();
+        addExp();
     }
 }
 function reload(){
