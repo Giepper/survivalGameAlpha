@@ -409,7 +409,7 @@ fieldset{
 .foundItemInfoHybrid{
     height: auto;
 }
-/* @media screen and (max-width: 1000px){
+@media screen and (max-width: 1000px){
     .centerEdit{
         flex-basis: 80%;
     }
@@ -419,7 +419,7 @@ fieldset{
     .foundItemInfo{
         height: auto;
     }
-} */
+}
 /* @media screen and (max-width: 600px){
     div.left{
         flex-basis: 100%;

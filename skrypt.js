@@ -20,8 +20,38 @@ var placeItem=document.querySelectorAll('.placeItem');
 
 var myHealth=100;
 
+//Experience
 var experienceIndicator=document.querySelector('.experienceIndicator');
 var experienceIndicatorValue=experienceIndicator.getAttribute('value');
+var level=document.querySelector('.level');
+var levelValue=document.querySelector('.level').getAttribute('value');
+var levelSpan=document.querySelector('.levelSpan');
+var levelCount=1;
+var allExperience=0;
+var levelSound=new Audio('levelSound.mp3');
+levelSound.volume=0.25;
+
+function exp(){
+    var expWidth=allExperience+'%';
+    experienceIndicator.style.setProperty('width',expWidth);
+    experienceIndicator.setAttribute('value',allExperience);
+    if(allExperience>99){
+        levelSound.play();
+        levelCount++;
+        level.setAttribute('value',levelCount);
+        level.innerHTML='Level: '+level.getAttribute('value');
+        experienceIndicator.style.setProperty('width','1%');
+        allExperience=0;
+        experienceIndicator.setAttribute('value',0);
+    }
+    if((level.getAttribute('value'))==100){
+        alert('Congratulations! You won');
+    }
+}
+function addExp(){
+    allExperience+=50;
+    exp();
+}
 
 //Resolution Items
 var left=document.querySelector('.left');
@@ -1152,6 +1182,7 @@ function search(e){
                 }if(howFood>9){
                     bread.foundItem();
                 }
+                addExp();
             }else{
                 water.didntFound();
             }
@@ -1172,6 +1203,7 @@ function search(e){
                 }if(howFood>3){
                     cigaretes.foundItem();
                 }
+                addExp();
             }else{
                 vodka.didntFound();
             }
@@ -1202,6 +1234,7 @@ function search(e){
                 }if((howClothes>900)&&(howClothes<1000)){
                     shoes.foundItem();
                 }
+                addExp();
             }else{
                 cap.didntFound();
             }
@@ -1226,6 +1259,7 @@ function search(e){
                 }if(howWeapon>9){
                     gun.foundItem();
                 }
+                addExp();
             }else{
                 pipe.didntFound();
             }
