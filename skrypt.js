@@ -20,7 +20,35 @@ var placeItem=document.querySelectorAll('.placeItem');
 
 var myHealth=100;
 
-//Add to Eq
+var experienceIndicator=document.querySelector('.experienceIndicator');
+var experienceIndicatorValue=experienceIndicator.getAttribute('value');
+
+//Resolution Items
+var left=document.querySelector('.left');
+var centerEdit=document.querySelector('.centerEdit');
+var right=document.querySelector('.right');
+var human=document.querySelector('.human');
+var resolutionModal=document.querySelector('.resolutionModal');
+var pcMode=document.querySelector('.pcMode');
+var hybridMode=document.querySelector('.hybridMode');
+var mobileMode=document.querySelector('.mobileMode');
+
+pcMode.addEventListener('click', ()=>{
+    resolutionModal.style.setProperty('display','none');
+});
+hybridMode.addEventListener('click', ()=>{
+    resolutionModal.style.setProperty('display','none');
+    foundItemInfo.classList.add('foundItemInfoHybrid');
+    centerEdit.classList.add('centerEditHybrid');
+    right.classList.add('rightHybrid');
+});
+mobileMode.addEventListener('click', ()=>{
+    resolutionModal.style.setProperty('display','none');
+    left.classList.add('leftPhone');
+    centerEdit.classList.add('centerEditPhone');
+    right.classList.add('rightPhone');
+    human.classList.add('humanPhone');
+});
 
 //Human Items
 //Human

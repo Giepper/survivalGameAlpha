@@ -11,7 +11,7 @@ div.container{
     display: flex;
     flex-wrap: wrap;
 }
-div.left{
+.left{
     flex-basis: 20%;
     background-color: #444;
     height: 100vh;
@@ -32,8 +32,8 @@ div.healthIndicator{
     margin-right: auto;
     margin-bottom: 1%;
 }
-div.defenseIndicator{
-    width: 100%;
+div.experienceIndicator{
+    width: 1%;
     height: 15px;
     background-color: goldenrod;
     margin-left: auto;
@@ -74,6 +74,7 @@ div.main{
     flex-basis: 60%;
     height: 80vh;
     background: url('city.jpg');
+    background-size: cover;
 }
 div.city{
     width: 100%;
@@ -135,6 +136,9 @@ button{
 button:hover{
     background-color: #999;
     transition: .5s;
+}
+button:focus{
+    outline: 2px solid blueviolet;
 }
 .sound{
     padding: 1%;
@@ -362,7 +366,50 @@ p.money{
 fieldset{
     color: #fff;
 }
-@media screen and (max-width: 1000px){
+.level{
+    color: rgb(25, 189, 25);
+}
+.resolutionModal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #222;
+    opacity: 0.9;
+    z-index: 999;
+}
+.modalContent{
+    text-align: center;
+}
+.chooseResolution{
+    color: #fff;
+}
+.leftPhone{
+    flex-basis: 100%;
+}
+.humanPhone{
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.centerEditPhone{
+    flex-basis: 100%;
+}
+.rightPhone{
+    flex-basis: 100%;
+}
+.centerEditHybrid{
+    flex-basis: 80%;
+}
+.rightHybrid{
+    flex-basis: 100%;
+}
+.foundItemInfoHybrid{
+    height: auto;
+}
+/* @media screen and (max-width: 1000px){
     .centerEdit{
         flex-basis: 80%;
     }
@@ -372,8 +419,8 @@ fieldset{
     .foundItemInfo{
         height: auto;
     }
-}
-@media screen and (max-width: 600px){
+} */
+/* @media screen and (max-width: 600px){
     div.left{
         flex-basis: 100%;
     }
@@ -389,4 +436,4 @@ fieldset{
     .right{
         flex-basis: 100%;
     }
-}
+} */
