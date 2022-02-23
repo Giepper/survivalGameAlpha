@@ -49,7 +49,7 @@ function exp(){
     }
 }
 function addExp(){
-    allExperience+=50;
+    allExperience+=5;
     exp();
 }
 
