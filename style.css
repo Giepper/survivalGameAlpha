@@ -167,13 +167,13 @@ div.buyContainer{
     margin: auto;
     overflow-y: scroll;
 }
-div.eqContainer::-webkit-scrollbar{
+::-webkit-scrollbar{
     width: 10px;
 }
-div.eqContainer::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb{
     background: #fff;
 }
-div.eqContainer::-webkit-scrollbar-track{
+::-webkit-scrollbar-track{
     background-color: #aaa;
 }
 .eqTitle{

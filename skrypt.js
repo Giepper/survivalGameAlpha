@@ -228,12 +228,10 @@ function sell(e){
 var buyClone;
 function buy(e){
     if(e.target.classList.contains('buyItem')){
-        // buyClone=e.target.cloneNode(true);
-        // buyClone.classList.remove('buyItem');
-        // buyClone.appendChild(eqContainer);
         if(allValue>=e.target.getAttribute('value')){
             allValue-=e.target.getAttribute('value');;
             money.innerHTML='Money: '+allValue;
+            //Buy Armor
             if(e.target.classList.contains('helmetBuy')){
                 helmet.foundItem();
             }
@@ -245,6 +243,32 @@ function buy(e){
             }
             if(e.target.classList.contains('bootsBuy')){
                 militaryShoes.foundItem();
+            }
+            //Buy Weapon
+            if(e.target.classList.contains('batBuy')){
+                pipe.foundItem();
+            }
+            if(e.target.classList.contains('knifeBuy')){
+                knife.foundItem();
+            }
+            if(e.target.classList.contains('axeBuy')){
+                axe.foundItem();
+            }
+            if(e.target.classList.contains('gunBuy')){
+                gun.foundItem();
+            }
+            //Buy Food
+            if(e.target.classList.contains('canBuy')){
+                can.foundItem();
+            }
+            if(e.target.classList.contains('waterBuy')){
+                water.foundItem();
+            }
+            if(e.target.classList.contains('juiceBuy')){
+                juice.foundItem();
+            }
+            if(e.target.classList.contains('breadBuy')){
+                bread.foundItem();
             }
         }else{
             alert("You need $"+e.target.getAttribute('value'));
@@ -545,7 +569,7 @@ function weapon(itemName,price,damage,criticalChance,photo){
         },
     }
 }
-var pipe=weapon('bat',1,5,5,'bat-svgrepo-com.svg');
+var pipe=weapon('bat',50,5,5,'bat-svgrepo-com.svg');
 var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
 var axe=weapon('axe',300,9,17,'axe-svgrepo-com.svg');
 var gun=weapon('gun',700,11,30,'gunWeapon-svgrepo-com.svg');
@@ -760,10 +784,10 @@ function powerAttackFunction(){
 
     damageItemsInfo();
 }
-var randRun=(Math.random()*10).toFixed(0);
 function runFunction(){
+    var randRun=(Math.random()*10).toFixed(0);
     var runSound=new Audio('runSound.mp3');
-    if(randRun<6){
+    if(randRun%2==0){
         runSound.play();
         main.style.setProperty('background',"url('city.jpg')");
         enemyContainer.style.setProperty('display','none');
