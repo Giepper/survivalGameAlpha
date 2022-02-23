@@ -342,14 +342,29 @@ function buy(e){
             if(e.target.classList.contains('batBuy')){
                 pipe.foundItem();
             }
+            if(e.target.classList.contains('wrenchBuy')){
+                wrench.foundItem();
+            }
+            if(e.target.classList.contains('kitchenKnifeBuy')){
+                kitchenKnife.foundItem();
+            }
             if(e.target.classList.contains('knifeBuy')){
                 knife.foundItem();
+            }
+            if(e.target.classList.contains('oldAxeBuy')){
+                oldAxe.foundItem();
             }
             if(e.target.classList.contains('axeBuy')){
                 axe.foundItem();
             }
             if(e.target.classList.contains('gunBuy')){
                 gun.foundItem();
+            }
+            if(e.target.classList.contains('uziBuy')){
+                uzi.foundItem();
+            }
+            if(e.target.classList.contains('akBuy')){
+                ak.foundItem();
             }
             //Buy Food
             if(e.target.classList.contains('canBuy')){
