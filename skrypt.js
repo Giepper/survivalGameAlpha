@@ -302,6 +302,42 @@ function buy(e){
             if(e.target.classList.contains('bootsBuy')){
                 militaryShoes.foundItem();
             }
+            if(e.target.classList.contains('capBuy')){
+                cap.foundItem();
+            }
+            if(e.target.classList.contains('policeCapBuy')){
+                policeCap.foundItem();
+            }
+            if(e.target.classList.contains('shirtBuy')){
+                shirt.foundItem();
+            }
+            if(e.target.classList.contains('yellowShirtBuy')){
+                yellowShirt.foundItem();
+            }
+            if(e.target.classList.contains('redShirtBuy')){
+                redShirt.foundItem();
+            }
+            if(e.target.classList.contains('najmanJacketBuy')){
+                najmanJacket.foundItem();
+            }
+            if(e.target.classList.contains('jeansBuy')){
+                jeans.foundItem();
+            }
+            if(e.target.classList.contains('betterJeansBuy')){
+                betterJeans.foundItem();
+            }
+            if(e.target.classList.contains('yellowPantsBuy')){
+                yellowPants.foundItem();
+            }
+            if(e.target.classList.contains('shoesBuy')){
+                shoes.foundItem();
+            }
+            if(e.target.classList.contains('yellowShoesBuy')){
+                yellowShoes.foundItem();
+            }
+            if(e.target.classList.contains('shoesShoeBuy')){
+                shoesShoe.foundItem();
+            }
             //Buy Weapon
             if(e.target.classList.contains('batBuy')){
                 pipe.foundItem();
@@ -327,6 +363,18 @@ function buy(e){
             }
             if(e.target.classList.contains('breadBuy')){
                 bread.foundItem();
+            }
+            if(e.target.classList.contains('beerBuy')){
+                beer.foundItem();
+            }
+            if(e.target.classList.contains('fishBuy')){
+                fish.foundItem();
+            }
+            if(e.target.classList.contains('meatBuy')){
+                meat.foundItem();
+            }
+            if(e.target.classList.contains('tomatoBuy')){
+                tomato.foundItem();
             }
         }else{
             alert("You need $"+e.target.getAttribute('value'));
@@ -517,9 +565,13 @@ function eatFood(e){
             }
         }
 }
+var beer=food('beer',20,10,'beer-svgrepo-com.svg');
 var bread=food('bread',15,10,'bread-svgrepo-com.svg');
 var can=food('can',10,5,'can-svgrepo-com.svg');
+var fish=food('fish',7,3,'fish-svgrepo-com.svg');
 var juice=food('juice',13,7,'juice-svgrepo-com.svg');
+var meat=food('meat',15,10,'meat-svgrepo-com.svg');
+var tomato=food('tomato',10,5,'tomato-can-svgrepo-com.svg');
 var water=food('water',5,2,'water-svgrepo-com.svg');
 // can.foundItem();
 // water.foundItem();
@@ -573,6 +625,9 @@ function valItems(itemName,price,photo){
     }
 }
 var cigaretes=valItems('cigaretes',30,'cigarette-tobacco-svgrepo-com.svg');
+var diamondRing=valItems('diamond ring',150,'diamond-ring-jewelry-svgrepo-com.svg');
+var goldCoin=valItems('gold coin',100,'gold-coin-svgrepo-com.svg');
+var wine=valItems('wine',50,'wine-svgrepo-com.svg');
 var vodka=valItems('vodka',45,'vodka-svgrepo-com.svg');
 // cigaretes.foundItem();
 // vodka.foundItem();
@@ -629,10 +684,10 @@ function weapon(itemName,price,damage,criticalChance,photo){
         },
     }
 }
-var pipe=weapon('bat',50,5,5,'bat-svgrepo-com.svg');
-var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
 var axe=weapon('axe',300,9,17,'axe-svgrepo-com.svg');
 var gun=weapon('gun',700,11,30,'gunWeapon-svgrepo-com.svg');
+var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
+var pipe=weapon('bat',50,5,5,'bat-svgrepo-com.svg');
 // pipe.foundItem();
 // knife.foundItem();
 // axe.foundItem();
@@ -698,14 +753,25 @@ function clothes(itemName,type,price,armor,photo){
         }
     }
 }
-var cap=clothes('cap','head',1,2,'capArmor-svgrepo-com.svg');
-var shirt=clothes('shirt','body',1,3,'shirtArmor-svgrepo-com.svg');
-var jeans=clothes('jeans','legs',1,2,'jeans-svgrepo-com.svg');
-var shoes=clothes('shoes','foot',1,1,'shoesArmor-svgrepo-com.svg');
+var cap=clothes('cap','head',10,2,'capArmor-svgrepo-com.svg');
 var helmet=clothes('helmet','head',300,5,'helmet-svgrepo-com.svg');
+var policeCap=clothes('police cap','head',20,3,'police-cap-svgrepo-com.svg');
+
 var ballisticCam=clothes('vest','body',350,6,'kevlar-vest-svgrepo-com.svg');
+var najmanJacket=clothes('najman jacket','body',12,4,'najman-jacket-svgrepo-com.svg');
+var redShirt=clothes('red shirt','body',10,3,'red-shirt-svgrepo-com.svg');
+var shirt=clothes('shirt','body',10,3,'shirtArmor-svgrepo-com.svg');
+var yellowShirt=clothes('yellow shirt','body',10,3,'yellow-shirt-svgrepo-com.svg');
+
+var betterJeans=clothes('jeans','legs',10,2,'better-jeans-svgrepo-com.svg');
+var jeans=clothes('jeans','legs',10,2,'jeans-svgrepo-com.svg');
 var militaryTrousers=clothes('military trousers','legs',200,4,'trousers-pants-svgrepo-com.svg');
+var yellowPants=clothes('yellow pants','legs',15,4,'yellow-pants-svgrepo-com.svg');
+
 var militaryShoes=clothes('military shoes','foot',200,3,'boots-svgrepo-com.svg');
+var shoes=clothes('shoes','foot',10,1,'shoesArmor-svgrepo-com.svg');
+var shoesShoe=clothes('better shoes','foot',11,2,'shoes-shoe-svgrepo-com.svg');
+var yellowShoes=clothes('better shoes','foot',10,1,'yellow-shoes-svgrepo-com.svg');
 // cap.foundItem();
 // shirt.foundItem();
 // jeans.foundItem();
@@ -1170,20 +1236,35 @@ function search(e){
             searchProgress[x].style.setProperty('display','none');
         }
         var foodPercent=parseFloat(foodChance[e.target.index].getAttribute('value'));
-        var findFood=Math.random()*100;
+        var findFood=(Math.random()*100).toFixed(0);
         var howFood=Math.random()*10;
-        console.log(findFood.toFixed(0));
-        console.log(howFood.toFixed(0));
+        var chooseFoodType=(Math.random()*10).toFixed(0);
         if(findFood>0){
             if(findFood<=foodPercent){
                 if(howFood<=3){
-                    water.foundItem();
+                    if(chooseFoodType%2==0){
+                        water.foundItem();
+                    }else{
+                        beer.foundItem();
+                    }
                 }if((howFood>3)&&(howFood<7)){
-                    can.foundItem();
+                    if(chooseFoodType%2==0){
+                        can.foundItem();
+                    }else{
+                        tomato.foundItem();
+                    }
                 }if((howFood>7)&&(howFood<10)){
-                    juice.foundItem();
+                    if(chooseFoodType%2==0){
+                        juice.foundItem();
+                    }else{
+                        fish.foundItem();
+                    }
                 }if(howFood>9){
-                    bread.foundItem();
+                    if(chooseFoodType%2==0){
+                        bread.foundItem();
+                    }else{
+                        meat.foundItem();
+                    }
                 }
                 addExp();
             }else{
@@ -1196,15 +1277,24 @@ function search(e){
         //Search Valuable Items
         var valPercent=parseFloat(valChance[e.target.index].getAttribute('value'));
         var findVal=Math.random()*100;
-        var howVal=Math.random()*10;
-        console.log(findVal.toFixed(0));
-        console.log(howVal.toFixed(0));
+        var howVal=(Math.random()*10).toFixed(0);
+        var chooseValType=(Math.random()*10).toFixed(0);
         if(findVal>0){
             if(findVal<=valPercent){
-                if(howVal<=3){
-                    vodka.foundItem();
-                }if(howFood>3){
+                if(howVal<5){
+                    if(chooseValType%2==0){
+                        vodka.foundItem();
+                    }else{
+                        wine.foundItem();
+                    }
+                }if((howVal>4)&&(howVal<10)){
                     cigaretes.foundItem();
+                }if(howVal>9){
+                    if(chooseValType%2==0){
+                        goldCoin.foundItem();
+                    }else{
+                        diamondRing.foundItem();
+                    }
                 }
                 addExp();
             }else{
@@ -1216,26 +1306,60 @@ function search(e){
 
         //Search Clothes
         var clothesPercent=parseFloat(clothesChance[e.target.index].getAttribute('value'));
-        var findClothes=Math.random()*100;
-        var howClothes=Math.random()*1000;
-        console.log(findClothes.toFixed(0));
-        console.log(howClothes.toFixed(0));
+        var findClothes=(Math.random()*100).toFixed(0);
+        var howClothes=(Math.random()*1000).toFixed(0);
+        var chooseClothesType=(Math.random()*10).toFixed(0);
+        var chooseClothesTypeNext=(Math.random()*10).toFixed(0);
         if(findClothes>0){
             if(findClothes<=clothesPercent){
                 if(howClothes<200){
-                    cap.foundItem();
+                    if(chooseClothesType%2==0){
+                        cap.foundItem();
+                    }else{
+                        policeCap.foundItem();
+                    }
                 }if((howClothes>199)&&(howClothes<401)){
-                    shirt.foundItem();
+                    if(chooseClothesType%2==0){
+                        if(chooseClothesTypeNext%2==0){
+                            shirt.foundItem();
+                        }else{
+                            redShirt.foundItem();
+                        }
+                    }else{
+                        if(chooseClothesTypeNext%2==0){
+                            yellowShirt.foundItem();
+                        }else{
+                            najmanJacket.foundItem();
+                        }
+                    }
                 }if((howClothes>400)&&(howClothes<601)){
-                    jeans.foundItem();
+                    if(chooseClothesType%2==0){
+                        if(chooseClothesTypeNext%2==0){
+                            jeans.foundItem();
+                        }else{
+                            betterJeans.foundItem();
+                        }
+                    }else{
+                        yellowPants.foundItem();
+                    }
                 }if((howClothes>600)&&(howClothes<801)){
-                    shoes.foundItem();
+                    if(chooseClothesType%2==0){
+                        if(chooseClothesTypeNext%2==0){
+                            shoes.foundItem();
+                        }else{
+                            yellowShoes.foundItem();
+                        }
+                    }else{
+                        shoesShoe.foundItem();
+                    }
                 }if((howClothes>800)&&(howClothes<851)){
-                    shirt.foundItem();
+                    helmet.foundItem();
                 }if((howClothes>850)&&(howClothes<901)){
-                    jeans.foundItem();
-                }if((howClothes>900)&&(howClothes<1000)){
-                    shoes.foundItem();
+                    ballisticCam.foundItem();
+                }if((howClothes>900)&&(howClothes<951)){
+                    militaryTrousers.foundItem();
+                }if(howClothes>950){
+                    militaryShoes.foundItem();
                 }
                 addExp();
             }else{
