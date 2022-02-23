@@ -684,10 +684,15 @@ function weapon(itemName,price,damage,criticalChance,photo){
         },
     }
 }
-var axe=weapon('axe',300,9,17,'axe-svgrepo-com.svg');
-var gun=weapon('gun',700,11,30,'gunWeapon-svgrepo-com.svg');
-var knife=weapon('knife',150,7,15,'knife-svgrepo-com.svg');
-var pipe=weapon('bat',50,5,5,'bat-svgrepo-com.svg');
+var ak=weapon('ak',1500,8,9,'ak-svgrepo-com.svg');
+var axe=weapon('axe',300,5,6,'axe-svgrepo-com.svg');
+var gun=weapon('gun',700,6,7,'gunWeapon-svgrepo-com.svg');
+var kitchenKnife=weapon('kitchen knife',100,3,4,'kitchen-knife-svgrepo-com.svg');
+var knife=weapon('combat knife',150,4,5,'knife-svgrepo-com.svg');
+var oldAxe=weapon('old axe',100,3,4,'old-axe-svgrepo-com.svg');
+var pipe=weapon('bat',50,2,3,'bat-svgrepo-com.svg');
+var uzi=weapon('uzi',900,7,8,'uzi-svgrepo-com.svg');
+var wrench=weapon('wrench',50,2,3,'wrench-svgrepo-com.svg');
 // pipe.foundItem();
 // knife.foundItem();
 // axe.foundItem();
@@ -1371,20 +1376,40 @@ function search(e){
 
         //Search Weapons
         var weaponPercent=parseFloat(weaponChance[e.target.index].getAttribute('value'));
-        var findWeapon=Math.random()*100;
-        var howWeapon=Math.random()*10;
-        console.log(findWeapon.toFixed(0));
-        console.log(howWeapon.toFixed(0));
+        var findWeapon=(Math.random()*100).toFixed(0);
+        var howWeapon=(Math.random()*10).toFixed(0);
+        var chooseWeaponType=(Math.random()*10).toFixed(0);
+        var chooseWeaponTypeNext=(Math.random()*10).toFixed(0);
         if(findWeapon>0){
             if(findWeapon<=weaponPercent){
                 if(howWeapon<=5){
-                    pipe.foundItem();
+                    if(chooseWeaponType%2==0){
+                        pipe.foundItem();
+                    }else{
+                        wrench.foundItem();
+                    }
                 }if((howWeapon>5)&&(howWeapon<7)){
-                    knife.foundItem();
+                    if(chooseWeaponType%2==0){
+                        knife.foundItem();
+                    }else{
+                        kitchenKnife.foundItem();
+                    }
                 }if((howWeapon>7)&&(howWeapon<10)){
-                    axe.foundItem();
+                    if(chooseWeaponType%2==0){
+                        axe.foundItem();
+                    }else{
+                        oldAxe.foundItem();
+                    }
                 }if(howWeapon>9){
-                    gun.foundItem();
+                    if(chooseWeaponType%2==0){
+                        gun.foundItem();
+                    }else{
+                        if(chooseWeaponTypeNext%2==0){
+                            ak.foundItem();
+                        }else{
+                            uzi.foundItem();
+                        }
+                    }
                 }
                 addExp();
             }else{
