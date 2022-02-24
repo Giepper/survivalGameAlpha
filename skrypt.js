@@ -20,6 +20,8 @@ var placeItem=document.querySelectorAll('.placeItem');
 
 var myHealth=100;
 
+var weaponDurability=document.querySelector('.weaponDurability');
+
 //Experience
 var experienceIndicator=document.querySelector('.experienceIndicator');
 var experienceIndicatorValue=experienceIndicator.getAttribute('value');
@@ -654,6 +656,7 @@ function weapon(itemName,price,damage,criticalChance,photo){
         price: price,
         damage: damage,
         criticalChance: criticalChance,
+        durability: 50,
         photo: photo,
         foundItem: function(){
             //Add To Eq
@@ -663,6 +666,7 @@ function weapon(itemName,price,damage,criticalChance,photo){
             newEl.setAttribute('id',chance.guid());
             newEl.setAttribute('damage',this.damage);
             newEl.setAttribute('criticalChance',this.criticalChance);
+            newEl.setAttribute('value',this.durability);
             newEl.classList.add('elementJustify');
             newEl.classList.add('weaponItem');
             eqContainer.appendChild(newEl);
@@ -697,6 +701,13 @@ function weapon(itemName,price,damage,criticalChance,photo){
                 foundItemInfo.style.setProperty('display','none');
             }
         },
+        // breakWeapon: function(){
+        //     var broken=this.durability-=1;
+        //     console.log(broken);
+        //     if(broken<1){
+        //         alert('nigger');
+        //     }
+        // }
     }
 }
 var ak=weapon('ak',1500,8,9,'ak-svgrepo-com.svg');
@@ -861,6 +872,22 @@ var oneMan=enemy('Armed man',100,5,'oneMan','oneMan.jpg');
 var groupOfMen=enemy('Group of armed men',300,10,'groupOfMen','groupOfMen.jpg');
 var enemyPatrol=enemy('Enemy patrol',450,15,'enemyPatrol','enemyPatrol.jpg');
 
+//Weapon durability
+var weaponDurabilityWidth;
+
+function breakWeapon(){
+    var cloneWeaponValue=parseInt(cloneWeapon.getAttribute('value'));
+    cloneWeapon.setAttribute('value',(cloneWeaponValue-1));
+    weaponDurability.style.setProperty('display','block');
+    weaponDurabilityWidth=(cloneWeapon.getAttribute('value'))+'%';
+    weaponDurability.style.setProperty('width',weaponDurabilityWidth);
+    if(cloneWeaponValue<2){
+        cloneWeapon.remove();
+        defaultWeaponImg.style.setProperty('display','block');
+        weaponDurability.style.setProperty('display','none');
+    }
+}
+
 function attackListeners(){
     fastAttack.addEventListener('click',fastAttackFunction);
     powerAttack.addEventListener('click',powerAttackFunction);
@@ -901,6 +928,9 @@ function fastAttackFunction(){
     damage=(Math.random()*6).toFixed(0);
     damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
     damageItemsInfo();
+    if(cloneWeapon.classList.contains('usingWeapon')){
+        breakWeapon();
+    }
 }
 function powerAttackFunction(){
     var fastAttakSound;
@@ -1488,6 +1518,9 @@ function addWeaponToEq(e){
         e.target.remove();
         weaponDamage=parseInt(cloneWeapon.getAttribute('damage'));
         weaponCriticalChance=parseInt(cloneWeapon.getAttribute('criticalchance'));
+        weaponDurability.style.setProperty('display','block');
+        weaponDurabilityWidth=(cloneWeapon.getAttribute('value'))+'%'
+        weaponDurability.style.setProperty('width',weaponDurabilityWidth);
 
         //Damage Indicator
         itemDamageTxt=document.createTextNode(weaponDamage);
@@ -1513,6 +1546,7 @@ function deleteWeaponFromEq(e){
         cloneWeaponReverse.classList.remove('usingWeapon');
         cloneWeapon.remove();
         defaultWeaponImg.style.setProperty('display','block');
+        weaponDurability.style.setProperty('display','none');
 
         //Damage Indicator Default
         dmg.style.setProperty('display','inline-block');

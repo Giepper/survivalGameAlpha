@@ -409,6 +409,14 @@ fieldset{
 .foundItemInfoHybrid{
     height: auto;
 }
+.weaponDurability{
+    background-color: green;
+    height: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1%;
+    display: none;
+}
 @media screen and (max-width: 1000px){
     .centerEdit{
         flex-basis: 80%;
