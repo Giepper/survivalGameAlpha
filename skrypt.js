@@ -1124,12 +1124,12 @@ function damageItemsInfo(){
     console.log(health);
     console.log(myHealth);
 
-    if(health>0){
-        attackDisable();
-        setTimeout(attackEnable,500);
-    }else{
-        attackDisable();
-    }
+    // if(health>0){
+    //     attackDisable();
+    //     setTimeout(attackEnable,500);
+    // }else{
+    //     attackDisable();
+    // }
 
     winOrDead();
 }
