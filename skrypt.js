@@ -20,7 +20,13 @@ var placeItem=document.querySelectorAll('.placeItem');
 
 var myHealth=100;
 
+//Durability items
 var weaponDurability=document.querySelector('.weaponDurability');
+var headArmorDurability=document.querySelector('.headArmorIndicator');
+var bodyArmorDurability=document.querySelector('.bodyArmorIndicator');;
+var legsArmorDurability=document.querySelector('.legsArmorIndicator');;
+var footArmorDurability=document.querySelector('.footArmorIndicator');;
+
 
 //Experience
 var experienceIndicator=document.querySelector('.experienceIndicator');
@@ -731,6 +737,7 @@ function clothes(itemName,type,price,armor,photo){
         price: price,
         armor: armor,
         photo: photo,
+        durability: 50,
         foundItem: function(){
             //Add To Eq
             var newEl=document.createElement('img');
@@ -738,6 +745,7 @@ function clothes(itemName,type,price,armor,photo){
             newEl.setAttribute('value',this.price);
             newEl.setAttribute('id',chance.guid());
             newEl.setAttribute('armor',this.armor);
+            newEl.setAttribute('value',this.durability);
             newEl.classList.add('elementJustify');
             newEl.classList.add('clothesItem');
             newEl.addEventListener('click',sell);
@@ -872,7 +880,7 @@ var oneMan=enemy('Armed man',100,5,'oneMan','oneMan.jpg');
 var groupOfMen=enemy('Group of armed men',300,10,'groupOfMen','groupOfMen.jpg');
 var enemyPatrol=enemy('Enemy patrol',450,15,'enemyPatrol','enemyPatrol.jpg');
 
-//Weapon durability
+//Weapon Durability
 var weaponDurabilityWidth;
 
 function breakWeapon(){
@@ -885,6 +893,79 @@ function breakWeapon(){
         cloneWeapon.remove();
         defaultWeaponImg.style.setProperty('display','block');
         weaponDurability.style.setProperty('display','none');
+    }
+}
+
+//Armor Durability
+var headArmorDurabilityWidth;
+var bodyArmorDurabilityWidth;
+var legsArmorDurabilityWidth;
+var footArmorDurabilityWidth;
+
+    var cloneHeadArmorValue;
+    var cloneBodyArmorValue;
+    var cloneLegsArmorValue;
+    var cloneFootArmorValue;
+
+function breakHeadArmor(){
+    cloneHeadArmorValue=parseInt(cloneHeadArmor.getAttribute('value'));
+
+    cloneHeadArmor.setAttribute('value',(cloneHeadArmorValue-1));
+
+    headArmorDurability.style.setProperty('visibility','visible');
+
+    headArmorDurabilityWidth=cloneHeadArmorValue+'%';
+
+    headArmorDurability.style.setProperty('width',headArmorDurabilityWidth);
+
+    if(cloneHeadArmorValue<2){
+        cloneHeadArmor.remove();
+        defaultHeadArmorImg.style.setProperty('display','block');
+        headArmorDurability.style.setProperty('display','none');
+    }
+}
+function breakBodyArmor(){
+    cloneBodyArmorValue=parseInt(cloneBodyArmor.getAttribute('value'));
+
+    cloneBodyArmor.setAttribute('value',(cloneBodyArmorValue-1));
+
+    bodyArmorDurabilityWidth=cloneBodyArmorValue+'%';
+
+    bodyArmorDurability.style.setProperty('width',bodyArmorDurabilityWidth);
+}
+function breakLegsArmor(){
+    cloneLegsArmorValue=parseInt(cloneLegsArmor.getAttribute('value'));
+
+    cloneLegsArmor.setAttribute('value',(cloneLegsArmorValue-1));
+
+    legsArmorDurabilityWidth=cloneLegsArmorValue+'%';
+
+    legsArmorDurability.style.setProperty('width',legsArmorDurabilityWidth);
+}
+function breakFootArmor(){
+    cloneFootArmorValue=parseInt(cloneFootArmor.getAttribute('value'));
+
+    cloneFootArmor.setAttribute('value',(cloneFootArmorValue-1));
+
+    footArmorDurabilityWidth=cloneFootArmorValue+'%';
+
+    footArmorDurability.style.setProperty('width',footArmorDurabilityWidth);
+}
+function breakAllItems(){
+    if(cloneWeapon.classList.contains('usingWeapon')){
+        breakWeapon();
+    }
+    if(cloneHeadArmor.classList.contains('usingHeadArmor')){
+        breakHeadArmor();
+    }
+    if(cloneBodyArmor.classList.contains('usingBodyArmor')){
+        breakBodyArmor();
+    }
+    if(cloneLegsArmor.classList.contains('usingLegsArmor')){
+        breakLegsArmor();
+    }
+    if(cloneFootArmor.classList.contains('usingFootArmor')){
+        breakFootArmor();
     }
 }
 
@@ -928,9 +1009,7 @@ function fastAttackFunction(){
     damage=(Math.random()*6).toFixed(0);
     damageReduct=parseInt(headArmorSlot.getAttribute('value'))+parseInt(bodyArmorSlot.getAttribute('value'))+parseInt(legsArmorSlot.getAttribute('value'))+parseInt(footArmorSlot.getAttribute('value'));
     damageItemsInfo();
-    if(cloneWeapon.classList.contains('usingWeapon')){
-        breakWeapon();
-    }
+    breakAllItems();
 }
 function powerAttackFunction(){
     var fastAttakSound;
@@ -959,6 +1038,7 @@ function powerAttackFunction(){
     }
 
     damageItemsInfo();
+    breakAllItems();
 }
 function runFunction(){
     var randRun=(Math.random()*10).toFixed(0);
@@ -971,6 +1051,7 @@ function runFunction(){
         enableButtons();
     }else{
         damageItemsInfo();
+        breakAllItems();
     }
 }
 
@@ -1043,10 +1124,12 @@ function damageItemsInfo(){
     console.log(health);
     console.log(myHealth);
 
-    // if(health>0){
-    //     attackDisable();
-    //     setTimeout(attackEnable,500);
-    // }
+    if(health>0){
+        attackDisable();
+        setTimeout(attackEnable,500);
+    }else{
+        attackDisable();
+    }
 
     winOrDead();
 }
@@ -1596,6 +1679,10 @@ function addHeadArmorToEq(e){
 
         headArmorArmor=parseInt(cloneHeadArmor.getAttribute('armor'));
 
+        headArmorDurability.style.setProperty('visibility','visible');
+        headArmorDurabilityWidth=cloneHeadArmorValue+'%';
+        headArmorDurability.style.setProperty('width',headArmorDurabilityWidth);
+
         //Armor Indicator
         headArmorTxt=document.createTextNode(headArmorArmor);
         headArmorSlot.appendChild(headArmorTxt);
@@ -1645,6 +1732,10 @@ function addBodyArmorToEq(e){
         e.target.remove();
 
         bodyArmorArmor=parseInt(cloneBodyArmor.getAttribute('armor'));
+
+        bodyArmorDurability.style.setProperty('visibility','visible');
+        bodyArmorDurabilityWidth=cloneBodyArmorValue+'%';
+        bodyArmorDurability.style.setProperty('width',bodyArmorDurabilityWidth);
 
         //Armor Indicator
         bodyArmorTxt=document.createTextNode(bodyArmorArmor);
@@ -1696,6 +1787,10 @@ function addLegsArmorToEq(e){
 
         legsArmorArmor=parseInt(cloneLegsArmor.getAttribute('armor'));
 
+        legsArmorDurability.style.setProperty('visibility','visible');
+        legsArmorDurabilityWidth=cloneLegsArmorValue+'%';
+        legsArmorDurability.style.setProperty('width',legsArmorDurabilityWidth);
+
         //Armor Indicator
         legsArmorTxt=document.createTextNode(legsArmorArmor);
         legsArmorSlot.appendChild(legsArmorTxt);
@@ -1745,6 +1840,10 @@ function addFootArmorToEq(e){
         e.target.remove();
 
         footArmorArmor=parseInt(cloneFootArmor.getAttribute('armor'));
+
+        footArmorDurability.style.setProperty('visibility','visible');
+        footArmorDurabilityWidth=cloneFootArmorValue+'%';
+        footArmorDurability.style.setProperty('width',footArmorDurabilityWidth);
 
         //Armor Indicator
         footArmorTxt=document.createTextNode(footArmorArmor);

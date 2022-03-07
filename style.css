@@ -14,7 +14,8 @@ div.container{
 .left{
     flex-basis: 20%;
     background-color: #444;
-    height: 100vh;
+    height: 100%;
+    padding-bottom: 1.25%;
 }
 div.bars{
     width: 80%;
@@ -416,6 +417,18 @@ fieldset{
     margin-right: auto;
     margin-bottom: 1%;
     display: none;
+}
+.armorIndicatorContainer{
+    margin-bottom: 1%;
+}
+.headContainer{
+    margin-bottom: 1%;
+}
+.armorIndicatorBar{
+    width: 50%;
+    height: 15px;
+    background-color: green;
+    visibility: hidden;
 }
 @media screen and (max-width: 1000px){
     .centerEdit{
